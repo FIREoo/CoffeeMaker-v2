@@ -25,7 +25,7 @@ namespace CS_coffeeMakerVer2
     }
     class robotControl
     {
-        mode cmd = mode.stop;
+        public mode cmd = mode.stop;
         public static bool serverOn = false;
         public bool serverRunning
         {
@@ -37,9 +37,10 @@ namespace CS_coffeeMakerVer2
 
         //file
         static string ReadingFile = "";
-        StreamWriter txt_record;
+       public StreamWriter txt_record;
 
         string sMsg = string.Empty;
+        public string Msg { get { return sMsg; } }
         static byte rq_pos = 0;
 
         private void theServer(TcpListener tcp, ref mode cmd)
@@ -191,7 +192,7 @@ namespace CS_coffeeMakerVer2
 
                                     p++;
                                     break;
-                                case "sleep"://gripper 只能一行 gripper 一行 數字
+                                case "sleep":
                                     p++;
                                     Thread.Sleep(fileList[p].toInt());
                                     p++;
