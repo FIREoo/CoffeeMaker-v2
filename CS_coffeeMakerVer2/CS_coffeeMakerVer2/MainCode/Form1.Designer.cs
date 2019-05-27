@@ -123,6 +123,7 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.button_simulateAddAct = new System.Windows.Forms.Button();
             this.button_clearActionBase = new System.Windows.Forms.Button();
+            this.button_creatAction = new System.Windows.Forms.Button();
             this.panel_Larm.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -640,6 +641,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.button_creatAction);
             this.tabPage2.Controls.Add(this.button_clearActionBase);
             this.tabPage2.Controls.Add(this.label_Cup2_info);
             this.tabPage2.Controls.Add(this.label_Cup1_info);
@@ -1112,6 +1114,16 @@
             this.button_clearActionBase.UseVisualStyleBackColor = true;
             this.button_clearActionBase.Click += new System.EventHandler(this.button_clearActionBase_Click);
             // 
+            // button_creatAction
+            // 
+            this.button_creatAction.Location = new System.Drawing.Point(282, 229);
+            this.button_creatAction.Name = "button_creatAction";
+            this.button_creatAction.Size = new System.Drawing.Size(143, 65);
+            this.button_creatAction.TabIndex = 5;
+            this.button_creatAction.Text = "Creat action";
+            this.button_creatAction.UseVisualStyleBackColor = true;
+            this.button_creatAction.Click += new System.EventHandler(this.button_creatAction_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -1252,6 +1264,7 @@
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button_clearActionBase;
+        private System.Windows.Forms.Button button_creatAction;
     }
 }
 

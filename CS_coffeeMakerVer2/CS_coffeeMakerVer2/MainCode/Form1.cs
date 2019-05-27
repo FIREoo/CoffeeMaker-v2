@@ -445,16 +445,16 @@ namespace CS_coffeeMakerVer2
 
         private void button_simulateAddAct_Click(object sender, EventArgs e)
         {
-            if(radioButton_Act_pick.Checked)
+            if (radioButton_Act_pick.Checked)
             {
-               if( radioButton_Act_pick_cup1.Checked)
+                if (radioButton_Act_pick_cup1.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Pick");
                     item1.SubItems.Add("blue cup");
                     listView_actBase.Items.Add(item1);
                 }
-               else if(radioButton_Act_pick_cup2.Checked)
+                else if (radioButton_Act_pick_cup2.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Pick");
@@ -462,16 +462,16 @@ namespace CS_coffeeMakerVer2
                     listView_actBase.Items.Add(item1);
                 }
             }
-            else if(radioButton_Act_place.Checked)
+            else if (radioButton_Act_place.Checked)
             {
-                if(radioButton_Act_place_drip.Checked)
+                if (radioButton_Act_place_drip.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Place");
                     item1.SubItems.Add("to drip tray");
                     listView_actBase.Items.Add(item1);
                 }
-                else if(radioButton_Act_place_pos.Checked)
+                else if (radioButton_Act_place_pos.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Place");
@@ -479,7 +479,7 @@ namespace CS_coffeeMakerVer2
                     listView_actBase.Items.Add(item1);
                 }
             }
-            else if(radioButton_Act_pour.Checked)
+            else if (radioButton_Act_pour.Checked)
             {
                 if (radioButton_Act_pour_to1.Checked)
                 {
@@ -496,7 +496,7 @@ namespace CS_coffeeMakerVer2
                     listView_actBase.Items.Add(item1);
                 }
             }
-            else if(radioButton_Act_trigger.Checked)
+            else if (radioButton_Act_trigger.Checked)
             {
                 ListViewItem item1 = new ListViewItem();
                 item1.SubItems.Add("Trigger");
@@ -508,6 +508,47 @@ namespace CS_coffeeMakerVer2
         private void button_clearActionBase_Click(object sender, EventArgs e)
         {
             listView_actBase.Items.Clear();
+        }
+
+        private void button_creatAction_Click(object sender, EventArgs e)
+        {
+            Action action = new Action(UR, "test.path");
+
+            for (int i = 0; i < listView_actBase.Items.Count; i++)
+            {
+                string act = listView_actBase.Items[i].SubItems[1].Text;
+                string obj = listView_actBase.Items[i].SubItems[2].Text;
+
+                if (act == "Pick")
+                {
+                    if (obj == "blue cup")
+                        action.add(Subact.Pick(cup[0]));
+                    else if (obj == "pink cup")
+                        action.add(Subact.Pick(cup[1]));
+                    else if (obj == "on drip tray")
+                        action.add(Subact.Pick("outDripTray"));
+                }
+                else if (act == "Place")
+                {
+                    if (obj == "to drip tray")
+                        action.add(Subact.Place("toDripTray"));
+                    else if (obj == "to Pos")
+                        action.add(Subact.Place(new URCoordinates()));
+                }
+                else if (act == "Pour")
+                {
+                    if (obj == "to blue cup")
+                        action.add(Subact.Pour(cup[0]));
+                    else if (obj == "to pink cup")
+                        action.add(Subact.Pour(cup[1]));
+                }
+                else if (act == "Trigger")
+                {
+                    action.add(Subact.Trigger());
+                }
+            }
+            action.execute();
+
         }
     }//class form
 
