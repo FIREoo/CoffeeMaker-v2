@@ -153,7 +153,11 @@ namespace CS_coffeeMakerVer2
         }
         public static subactInfo Trigger()
         {
-            return new subactInfo();
+            subactInfo rtn = new subactInfo();
+            string[] file = System.IO.File.ReadAllLines($"Path//trigger.path");
+            foreach (string line in file)
+                rtn.infotxt.Add(line);
+            return rtn;
         }
     }
     class subactInfo

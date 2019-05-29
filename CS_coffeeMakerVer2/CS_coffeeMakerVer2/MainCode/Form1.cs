@@ -249,8 +249,8 @@ namespace CS_coffeeMakerVer2
         static Mat camImg1 = new Mat();
         static Mat camImg2 = new Mat();
         static Mat camImg3 = new Mat();
-        VideoCapture webCam1 = new VideoCapture(0);
-        VideoCapture webCam2 = new VideoCapture(1);
+        VideoCapture webCam1 = new VideoCapture(1);
+        //VideoCapture webCam2 = new VideoCapture(1);
         static YoloWrapper yoloWrapper;
         static IEnumerable<YoloItem> items;
         private void imageBox1_Click(object sender, EventArgs e)
@@ -415,10 +415,10 @@ namespace CS_coffeeMakerVer2
 
             Action action = new Action(UR, "test.path");
             action.add(Subact.Pick(cup[0]));
-            action.add(Subact.Pour(cup[1]));
-            action.add(Subact.Place("toDripTray"));
-            action.add(Subact.Pick("outDripTray"));
-            action.add(Subact.Place(new URCoordinates(0.240f, 0.23f, 0.0241f, 3.141f, 0, 0))); //position  p[0.2428418, 0.23, 0.02410359, 3.141593, 0, 0]
+           // action.add(Subact.Pour(cup[1]));
+           // action.add(Subact.Place("toDripTray"));
+           // action.add(Subact.Pick("outDripTray"));
+            //action.add(Subact.Place(new URCoordinates(0.240f, 0.23f, 0.0241f, 3.141f, 0, 0))); //position  p[0.2428418, 0.23, 0.02410359, 3.141593, 0, 0]
             action.execute();
         }
 
