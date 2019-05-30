@@ -71,6 +71,7 @@ namespace CS_coffeeMakerVer2
             rtn.infotxt.Add("sleep");
             rtn.infotxt.Add("1000");
 
+            up.Y -= 0.02f;//上升
             rtn.infotxt.Add("position");
             rtn.infotxt.Add(up.ToPos());
             return rtn;
@@ -148,6 +149,7 @@ namespace CS_coffeeMakerVer2
             now.Ry += 1.13f;
             now.X += 0.06f;
             rtn.infotxt.Add(now.ToPos());
+            up.Y -= 0.02f;//上升
             rtn.infotxt.Add(up.ToPos());
             return rtn;
         }
