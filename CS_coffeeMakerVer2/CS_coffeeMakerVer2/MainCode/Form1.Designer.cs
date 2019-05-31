@@ -105,6 +105,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.imageBox_realsenseMix = new Emgu.CV.UI.ImageBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.button_sumulateAround = new System.Windows.Forms.Button();
             this.button_simulateAddAct = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
@@ -127,6 +128,7 @@
             this.radioButton_Act_place = new System.Windows.Forms.RadioButton();
             this.radioButton_Act_trigger = new System.Windows.Forms.RadioButton();
             this.radioButton_Act_pour = new System.Windows.Forms.RadioButton();
+            this.radioButton_Act_pick_drip = new System.Windows.Forms.RadioButton();
             this.panel_Larm.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -662,7 +664,7 @@
             // 
             // button_creatAction
             // 
-            this.button_creatAction.Location = new System.Drawing.Point(282, 229);
+            this.button_creatAction.Location = new System.Drawing.Point(350, 229);
             this.button_creatAction.Name = "button_creatAction";
             this.button_creatAction.Size = new System.Drawing.Size(143, 65);
             this.button_creatAction.TabIndex = 5;
@@ -684,7 +686,7 @@
             // 
             this.label_Cup2_info.AutoSize = true;
             this.label_Cup2_info.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label_Cup2_info.Location = new System.Drawing.Point(280, 140);
+            this.label_Cup2_info.Location = new System.Drawing.Point(348, 140);
             this.label_Cup2_info.Name = "label_Cup2_info";
             this.label_Cup2_info.Size = new System.Drawing.Size(38, 20);
             this.label_Cup2_info.TabIndex = 3;
@@ -694,7 +696,7 @@
             // 
             this.label_Cup1_info.AutoSize = true;
             this.label_Cup1_info.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label_Cup1_info.Location = new System.Drawing.Point(278, 68);
+            this.label_Cup1_info.Location = new System.Drawing.Point(346, 68);
             this.label_Cup1_info.Name = "label_Cup1_info";
             this.label_Cup1_info.Size = new System.Drawing.Size(38, 20);
             this.label_Cup1_info.TabIndex = 3;
@@ -704,7 +706,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label21.Location = new System.Drawing.Point(280, 105);
+            this.label21.Location = new System.Drawing.Point(348, 105);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(90, 24);
             this.label21.TabIndex = 2;
@@ -714,7 +716,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label19.Location = new System.Drawing.Point(278, 33);
+            this.label19.Location = new System.Drawing.Point(346, 33);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(92, 24);
             this.label19.TabIndex = 2;
@@ -742,7 +744,7 @@
             listViewItem1});
             this.listView_actBase.Location = new System.Drawing.Point(6, 33);
             this.listView_actBase.Name = "listView_actBase";
-            this.listView_actBase.Size = new System.Drawing.Size(266, 519);
+            this.listView_actBase.Size = new System.Drawing.Size(334, 519);
             this.listView_actBase.TabIndex = 0;
             this.listView_actBase.UseCompatibleStateImageBehavior = false;
             this.listView_actBase.View = System.Windows.Forms.View.Details;
@@ -762,7 +764,7 @@
             // 
             this.columnHeader3.Text = "Object";
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader3.Width = 136;
+            this.columnHeader3.Width = 187;
             // 
             // tabControl2
             // 
@@ -788,7 +790,7 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(855, 658);
             this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.Text = "Video";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // button_testGrabcup
@@ -863,6 +865,7 @@
             this.videoToolStripMenuItem});
             this.contextMenuStrip_imgBox.Name = "contextMenuStrip_imgBox";
             this.contextMenuStrip_imgBox.Size = new System.Drawing.Size(105, 48);
+            this.contextMenuStrip_imgBox.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_imgBox_Opening);
             // 
             // liveToolStripMenuItem
             // 
@@ -900,6 +903,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.button_sumulateAround);
             this.tabPage5.Controls.Add(this.button_simulateAddAct);
             this.tabPage5.Controls.Add(this.panel7);
             this.tabPage5.Controls.Add(this.panel6);
@@ -913,6 +917,16 @@
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "action table";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // button_sumulateAround
+            // 
+            this.button_sumulateAround.Location = new System.Drawing.Point(420, 306);
+            this.button_sumulateAround.Name = "button_sumulateAround";
+            this.button_sumulateAround.Size = new System.Drawing.Size(149, 44);
+            this.button_sumulateAround.TabIndex = 5;
+            this.button_sumulateAround.Text = "A round";
+            this.button_sumulateAround.UseVisualStyleBackColor = true;
+            this.button_sumulateAround.Click += new System.EventHandler(this.button_sumulateAround_Click);
             // 
             // button_simulateAddAct
             // 
@@ -928,7 +942,7 @@
             // 
             this.panel7.BackColor = System.Drawing.Color.Gainsboro;
             this.panel7.Controls.Add(this.label18);
-            this.panel7.Location = new System.Drawing.Point(136, 239);
+            this.panel7.Location = new System.Drawing.Point(136, 269);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(127, 33);
             this.panel7.TabIndex = 3;
@@ -948,7 +962,7 @@
             this.panel6.BackColor = System.Drawing.Color.Gainsboro;
             this.panel6.Controls.Add(this.radioButton_Act_pour_to2);
             this.panel6.Controls.Add(this.radioButton_Act_pour_to1);
-            this.panel6.Location = new System.Drawing.Point(135, 162);
+            this.panel6.Location = new System.Drawing.Point(135, 192);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(110, 71);
             this.panel6.TabIndex = 3;
@@ -986,7 +1000,7 @@
             this.panel5.Controls.Add(this.textBox_Pz);
             this.panel5.Controls.Add(this.textBox_Py);
             this.panel5.Controls.Add(this.textBox_Px);
-            this.panel5.Location = new System.Drawing.Point(135, 90);
+            this.panel5.Location = new System.Drawing.Point(135, 120);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(269, 66);
             this.panel5.TabIndex = 3;
@@ -1051,10 +1065,11 @@
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
             this.panel4.Controls.Add(this.radioButton_Act_pick_cup1);
             this.panel4.Controls.Add(this.label17);
+            this.panel4.Controls.Add(this.radioButton_Act_pick_drip);
             this.panel4.Controls.Add(this.radioButton_Act_pick_cup2);
             this.panel4.Location = new System.Drawing.Point(135, 17);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(110, 67);
+            this.panel4.Size = new System.Drawing.Size(185, 97);
             this.panel4.TabIndex = 3;
             // 
             // radioButton_Act_pick_cup1
@@ -1100,7 +1115,7 @@
             this.panel1.Controls.Add(this.radioButton_Act_pour);
             this.panel1.Location = new System.Drawing.Point(29, 17);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(101, 261);
+            this.panel1.Size = new System.Drawing.Size(101, 285);
             this.panel1.TabIndex = 3;
             // 
             // radioButton_Act_pick
@@ -1108,7 +1123,7 @@
             this.radioButton_Act_pick.AutoSize = true;
             this.radioButton_Act_pick.Checked = true;
             this.radioButton_Act_pick.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_pick.Location = new System.Drawing.Point(16, 25);
+            this.radioButton_Act_pick.Location = new System.Drawing.Point(16, 38);
             this.radioButton_Act_pick.Name = "radioButton_Act_pick";
             this.radioButton_Act_pick.Size = new System.Drawing.Size(55, 23);
             this.radioButton_Act_pick.TabIndex = 1;
@@ -1120,7 +1135,7 @@
             // 
             this.radioButton_Act_place.AutoSize = true;
             this.radioButton_Act_place.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_place.Location = new System.Drawing.Point(16, 98);
+            this.radioButton_Act_place.Location = new System.Drawing.Point(16, 115);
             this.radioButton_Act_place.Name = "radioButton_Act_place";
             this.radioButton_Act_place.Size = new System.Drawing.Size(63, 23);
             this.radioButton_Act_place.TabIndex = 1;
@@ -1131,7 +1146,7 @@
             // 
             this.radioButton_Act_trigger.AutoSize = true;
             this.radioButton_Act_trigger.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_trigger.Location = new System.Drawing.Point(16, 227);
+            this.radioButton_Act_trigger.Location = new System.Drawing.Point(16, 255);
             this.radioButton_Act_trigger.Name = "radioButton_Act_trigger";
             this.radioButton_Act_trigger.Size = new System.Drawing.Size(76, 23);
             this.radioButton_Act_trigger.TabIndex = 1;
@@ -1142,12 +1157,23 @@
             // 
             this.radioButton_Act_pour.AutoSize = true;
             this.radioButton_Act_pour.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_pour.Location = new System.Drawing.Point(16, 166);
+            this.radioButton_Act_pour.Location = new System.Drawing.Point(16, 193);
             this.radioButton_Act_pour.Name = "radioButton_Act_pour";
             this.radioButton_Act_pour.Size = new System.Drawing.Size(60, 23);
             this.radioButton_Act_pour.TabIndex = 1;
             this.radioButton_Act_pour.Text = "pour";
             this.radioButton_Act_pour.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Act_pick_drip
+            // 
+            this.radioButton_Act_pick_drip.AutoSize = true;
+            this.radioButton_Act_pick_drip.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_pick_drip.Location = new System.Drawing.Point(55, 66);
+            this.radioButton_Act_pick_drip.Name = "radioButton_Act_pick_drip";
+            this.radioButton_Act_pick_drip.Size = new System.Drawing.Size(125, 23);
+            this.radioButton_Act_pick_drip.TabIndex = 1;
+            this.radioButton_Act_pick_drip.Text = "from drip tray";
+            this.radioButton_Act_pick_drip.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -1294,6 +1320,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_imgBox;
         private System.Windows.Forms.ToolStripMenuItem liveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
+        private System.Windows.Forms.Button button_sumulateAround;
+        private System.Windows.Forms.RadioButton radioButton_Act_pick_drip;
     }
 }
 
