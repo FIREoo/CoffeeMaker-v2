@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -80,6 +80,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.textBox_endDeg = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button_creatAction = new System.Windows.Forms.Button();
+            this.button_clearActionBase = new System.Windows.Forms.Button();
             this.label_Cup2_info = new System.Windows.Forms.Label();
             this.label_Cup1_info = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -100,30 +102,29 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.imageBox_realsenseMix = new Emgu.CV.UI.ImageBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.button_simulateAddAct = new System.Windows.Forms.Button();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.radioButton_Act_pour_to2 = new System.Windows.Forms.RadioButton();
+            this.radioButton_Act_pour_to1 = new System.Windows.Forms.RadioButton();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.radioButton_Act_place_pos = new System.Windows.Forms.RadioButton();
+            this.label20 = new System.Windows.Forms.Label();
+            this.radioButton_Act_place_drip = new System.Windows.Forms.RadioButton();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.radioButton_Act_pick_cup1 = new System.Windows.Forms.RadioButton();
+            this.label17 = new System.Windows.Forms.Label();
+            this.radioButton_Act_pick_cup2 = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.radioButton_Act_pick = new System.Windows.Forms.RadioButton();
+            this.radioButton_Act_place = new System.Windows.Forms.RadioButton();
             this.radioButton_Act_trigger = new System.Windows.Forms.RadioButton();
             this.radioButton_Act_pour = new System.Windows.Forms.RadioButton();
-            this.radioButton_Act_place = new System.Windows.Forms.RadioButton();
-            this.radioButton_Act_pour_to1 = new System.Windows.Forms.RadioButton();
-            this.radioButton_Act_place_drip = new System.Windows.Forms.RadioButton();
-            this.radioButton_Act_pick_cup2 = new System.Windows.Forms.RadioButton();
-            this.radioButton_Act_pour_to2 = new System.Windows.Forms.RadioButton();
-            this.radioButton_Act_place_pos = new System.Windows.Forms.RadioButton();
-            this.radioButton_Act_pick_cup1 = new System.Windows.Forms.RadioButton();
-            this.radioButton_Act_pick = new System.Windows.Forms.RadioButton();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.button_simulateAddAct = new System.Windows.Forms.Button();
-            this.button_clearActionBase = new System.Windows.Forms.Button();
-            this.button_creatAction = new System.Windows.Forms.Button();
+            this.button_inputAct = new System.Windows.Forms.Button();
             this.panel_Larm.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -138,11 +139,11 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox_realsenseMix)).BeginInit();
             this.tabPage5.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -450,7 +451,7 @@
             // label_LserverState
             // 
             this.label_LserverState.AutoSize = true;
-            this.label_LserverState.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_LserverState.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label_LserverState.Location = new System.Drawing.Point(24, 10);
             this.label_LserverState.Name = "label_LserverState";
             this.label_LserverState.Size = new System.Drawing.Size(84, 19);
@@ -470,7 +471,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label16.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label16.Location = new System.Drawing.Point(25, 10);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(84, 19);
@@ -656,10 +657,30 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Action base";
             // 
+            // button_creatAction
+            // 
+            this.button_creatAction.Location = new System.Drawing.Point(282, 229);
+            this.button_creatAction.Name = "button_creatAction";
+            this.button_creatAction.Size = new System.Drawing.Size(143, 65);
+            this.button_creatAction.TabIndex = 5;
+            this.button_creatAction.Text = "Creat action";
+            this.button_creatAction.UseVisualStyleBackColor = true;
+            this.button_creatAction.Click += new System.EventHandler(this.button_creatAction_Click);
+            // 
+            // button_clearActionBase
+            // 
+            this.button_clearActionBase.Location = new System.Drawing.Point(10, 559);
+            this.button_clearActionBase.Name = "button_clearActionBase";
+            this.button_clearActionBase.Size = new System.Drawing.Size(75, 23);
+            this.button_clearActionBase.TabIndex = 4;
+            this.button_clearActionBase.Text = "clear";
+            this.button_clearActionBase.UseVisualStyleBackColor = true;
+            this.button_clearActionBase.Click += new System.EventHandler(this.button_clearActionBase_Click);
+            // 
             // label_Cup2_info
             // 
             this.label_Cup2_info.AutoSize = true;
-            this.label_Cup2_info.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_Cup2_info.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label_Cup2_info.Location = new System.Drawing.Point(280, 140);
             this.label_Cup2_info.Name = "label_Cup2_info";
             this.label_Cup2_info.Size = new System.Drawing.Size(38, 20);
@@ -669,7 +690,7 @@
             // label_Cup1_info
             // 
             this.label_Cup1_info.AutoSize = true;
-            this.label_Cup1_info.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_Cup1_info.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label_Cup1_info.Location = new System.Drawing.Point(278, 68);
             this.label_Cup1_info.Name = "label_Cup1_info";
             this.label_Cup1_info.Size = new System.Drawing.Size(38, 20);
@@ -679,7 +700,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label21.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label21.Location = new System.Drawing.Point(280, 105);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(90, 24);
@@ -689,7 +710,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label19.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label19.Location = new System.Drawing.Point(278, 33);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(92, 24);
@@ -699,7 +720,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label15.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label15.Location = new System.Drawing.Point(6, 9);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(108, 21);
@@ -712,10 +733,10 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.listView_actBase.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.listView_actBase.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.listView_actBase.GridLines = true;
             this.listView_actBase.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.listView_actBase.Location = new System.Drawing.Point(6, 33);
             this.listView_actBase.Name = "listView_actBase";
             this.listView_actBase.Size = new System.Drawing.Size(266, 519);
@@ -855,6 +876,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.button_inputAct);
             this.tabPage5.Controls.Add(this.button_simulateAddAct);
             this.tabPage5.Controls.Add(this.panel7);
             this.tabPage5.Controls.Add(this.panel6);
@@ -869,96 +891,50 @@
             this.tabPage5.Text = "action table";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // button_simulateAddAct
             // 
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Controls.Add(this.radioButton_Act_pick);
-            this.panel1.Controls.Add(this.radioButton_Act_place);
-            this.panel1.Controls.Add(this.radioButton_Act_trigger);
-            this.panel1.Controls.Add(this.radioButton_Act_pour);
-            this.panel1.Location = new System.Drawing.Point(29, 17);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(101, 261);
-            this.panel1.TabIndex = 3;
+            this.button_simulateAddAct.Location = new System.Drawing.Point(420, 13);
+            this.button_simulateAddAct.Name = "button_simulateAddAct";
+            this.button_simulateAddAct.Size = new System.Drawing.Size(149, 265);
+            this.button_simulateAddAct.TabIndex = 4;
+            this.button_simulateAddAct.Text = "Add to action base";
+            this.button_simulateAddAct.UseVisualStyleBackColor = true;
+            this.button_simulateAddAct.Click += new System.EventHandler(this.button_simulateAddAct_Click);
             // 
-            // textBox1
+            // panel7
             // 
-            this.textBox1.Location = new System.Drawing.Point(130, 11);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(40, 23);
-            this.textBox1.TabIndex = 2;
+            this.panel7.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel7.Controls.Add(this.label18);
+            this.panel7.Location = new System.Drawing.Point(136, 239);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(127, 33);
+            this.panel7.TabIndex = 3;
             // 
-            // radioButton_Act_trigger
+            // label18
             // 
-            this.radioButton_Act_trigger.AutoSize = true;
-            this.radioButton_Act_trigger.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_trigger.Location = new System.Drawing.Point(16, 227);
-            this.radioButton_Act_trigger.Name = "radioButton_Act_trigger";
-            this.radioButton_Act_trigger.Size = new System.Drawing.Size(76, 23);
-            this.radioButton_Act_trigger.TabIndex = 1;
-            this.radioButton_Act_trigger.Text = "trigger";
-            this.radioButton_Act_trigger.UseVisualStyleBackColor = true;
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label18.Location = new System.Drawing.Point(9, 7);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(114, 19);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "coffee machine";
             // 
-            // radioButton_Act_pour
+            // panel6
             // 
-            this.radioButton_Act_pour.AutoSize = true;
-            this.radioButton_Act_pour.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_pour.Location = new System.Drawing.Point(16, 166);
-            this.radioButton_Act_pour.Name = "radioButton_Act_pour";
-            this.radioButton_Act_pour.Size = new System.Drawing.Size(60, 23);
-            this.radioButton_Act_pour.TabIndex = 1;
-            this.radioButton_Act_pour.Text = "pour";
-            this.radioButton_Act_pour.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_Act_place
-            // 
-            this.radioButton_Act_place.AutoSize = true;
-            this.radioButton_Act_place.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_place.Location = new System.Drawing.Point(16, 98);
-            this.radioButton_Act_place.Name = "radioButton_Act_place";
-            this.radioButton_Act_place.Size = new System.Drawing.Size(63, 23);
-            this.radioButton_Act_place.TabIndex = 1;
-            this.radioButton_Act_place.Text = "place";
-            this.radioButton_Act_place.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_Act_pour_to1
-            // 
-            this.radioButton_Act_pour_to1.AutoSize = true;
-            this.radioButton_Act_pour_to1.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_pour_to1.Location = new System.Drawing.Point(14, 38);
-            this.radioButton_Act_pour_to1.Name = "radioButton_Act_pour_to1";
-            this.radioButton_Act_pour_to1.Size = new System.Drawing.Size(87, 23);
-            this.radioButton_Act_pour_to1.TabIndex = 1;
-            this.radioButton_Act_pour_to1.Text = "(P) to (B)";
-            this.radioButton_Act_pour_to1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_Act_place_drip
-            // 
-            this.radioButton_Act_place_drip.AutoSize = true;
-            this.radioButton_Act_place_drip.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_place_drip.Location = new System.Drawing.Point(41, 38);
-            this.radioButton_Act_place_drip.Name = "radioButton_Act_place_drip";
-            this.radioButton_Act_place_drip.Size = new System.Drawing.Size(87, 23);
-            this.radioButton_Act_place_drip.TabIndex = 1;
-            this.radioButton_Act_place_drip.Text = "drip tray";
-            this.radioButton_Act_place_drip.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_Act_pick_cup2
-            // 
-            this.radioButton_Act_pick_cup2.AutoSize = true;
-            this.radioButton_Act_pick_cup2.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_pick_cup2.Location = new System.Drawing.Point(55, 38);
-            this.radioButton_Act_pick_cup2.Name = "radioButton_Act_pick_cup2";
-            this.radioButton_Act_pick_cup2.Size = new System.Drawing.Size(46, 23);
-            this.radioButton_Act_pick_cup2.TabIndex = 1;
-            this.radioButton_Act_pick_cup2.Text = "(P)";
-            this.radioButton_Act_pick_cup2.UseVisualStyleBackColor = true;
+            this.panel6.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel6.Controls.Add(this.radioButton_Act_pour_to2);
+            this.panel6.Controls.Add(this.radioButton_Act_pour_to1);
+            this.panel6.Location = new System.Drawing.Point(135, 162);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(110, 71);
+            this.panel6.TabIndex = 3;
             // 
             // radioButton_Act_pour_to2
             // 
             this.radioButton_Act_pour_to2.AutoSize = true;
             this.radioButton_Act_pour_to2.Checked = true;
-            this.radioButton_Act_pour_to2.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_pour_to2.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.radioButton_Act_pour_to2.Location = new System.Drawing.Point(14, 9);
             this.radioButton_Act_pour_to2.Name = "radioButton_Act_pour_to2";
             this.radioButton_Act_pour_to2.Size = new System.Drawing.Size(87, 23);
@@ -967,85 +943,16 @@
             this.radioButton_Act_pour_to2.Text = "(B) to (P)";
             this.radioButton_Act_pour_to2.UseVisualStyleBackColor = true;
             // 
-            // radioButton_Act_place_pos
+            // radioButton_Act_pour_to1
             // 
-            this.radioButton_Act_place_pos.AutoSize = true;
-            this.radioButton_Act_place_pos.Checked = true;
-            this.radioButton_Act_place_pos.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_place_pos.Location = new System.Drawing.Point(41, 9);
-            this.radioButton_Act_place_pos.Name = "radioButton_Act_place_pos";
-            this.radioButton_Act_place_pos.Size = new System.Drawing.Size(83, 23);
-            this.radioButton_Act_place_pos.TabIndex = 1;
-            this.radioButton_Act_place_pos.TabStop = true;
-            this.radioButton_Act_place_pos.Text = "Position";
-            this.radioButton_Act_place_pos.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_Act_pick_cup1
-            // 
-            this.radioButton_Act_pick_cup1.AutoSize = true;
-            this.radioButton_Act_pick_cup1.Checked = true;
-            this.radioButton_Act_pick_cup1.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_pick_cup1.Location = new System.Drawing.Point(55, 9);
-            this.radioButton_Act_pick_cup1.Name = "radioButton_Act_pick_cup1";
-            this.radioButton_Act_pick_cup1.Size = new System.Drawing.Size(46, 23);
-            this.radioButton_Act_pick_cup1.TabIndex = 1;
-            this.radioButton_Act_pick_cup1.TabStop = true;
-            this.radioButton_Act_pick_cup1.Text = "(B)";
-            this.radioButton_Act_pick_cup1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_Act_pick
-            // 
-            this.radioButton_Act_pick.AutoSize = true;
-            this.radioButton_Act_pick.Checked = true;
-            this.radioButton_Act_pick.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_pick.Location = new System.Drawing.Point(16, 25);
-            this.radioButton_Act_pick.Name = "radioButton_Act_pick";
-            this.radioButton_Act_pick.Size = new System.Drawing.Size(55, 23);
-            this.radioButton_Act_pick.TabIndex = 1;
-            this.radioButton_Act_pick.TabStop = true;
-            this.radioButton_Act_pick.Text = "pick";
-            this.radioButton_Act_pick.UseVisualStyleBackColor = true;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label20.Location = new System.Drawing.Point(12, 11);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(23, 19);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "to";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label18.Location = new System.Drawing.Point(9, 7);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(114, 19);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "coffee machine";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label17.Location = new System.Drawing.Point(12, 11);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(37, 19);
-            this.label17.TabIndex = 0;
-            this.label17.Text = "Cup";
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel4.Controls.Add(this.radioButton_Act_pick_cup1);
-            this.panel4.Controls.Add(this.label17);
-            this.panel4.Controls.Add(this.radioButton_Act_pick_cup2);
-            this.panel4.Location = new System.Drawing.Point(135, 17);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(110, 67);
-            this.panel4.TabIndex = 3;
+            this.radioButton_Act_pour_to1.AutoSize = true;
+            this.radioButton_Act_pour_to1.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_pour_to1.Location = new System.Drawing.Point(14, 38);
+            this.radioButton_Act_pour_to1.Name = "radioButton_Act_pour_to1";
+            this.radioButton_Act_pour_to1.Size = new System.Drawing.Size(87, 23);
+            this.radioButton_Act_pour_to1.TabIndex = 1;
+            this.radioButton_Act_pour_to1.Text = "(P) to (B)";
+            this.radioButton_Act_pour_to1.UseVisualStyleBackColor = true;
             // 
             // panel5
             // 
@@ -1061,22 +968,39 @@
             this.panel5.Size = new System.Drawing.Size(269, 66);
             this.panel5.TabIndex = 3;
             // 
-            // panel6
+            // radioButton_Act_place_pos
             // 
-            this.panel6.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel6.Controls.Add(this.radioButton_Act_pour_to2);
-            this.panel6.Controls.Add(this.radioButton_Act_pour_to1);
-            this.panel6.Location = new System.Drawing.Point(135, 162);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(110, 71);
-            this.panel6.TabIndex = 3;
+            this.radioButton_Act_place_pos.AutoSize = true;
+            this.radioButton_Act_place_pos.Checked = true;
+            this.radioButton_Act_place_pos.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_place_pos.Location = new System.Drawing.Point(41, 9);
+            this.radioButton_Act_place_pos.Name = "radioButton_Act_place_pos";
+            this.radioButton_Act_place_pos.Size = new System.Drawing.Size(83, 23);
+            this.radioButton_Act_place_pos.TabIndex = 1;
+            this.radioButton_Act_place_pos.TabStop = true;
+            this.radioButton_Act_place_pos.Text = "Position";
+            this.radioButton_Act_place_pos.UseVisualStyleBackColor = true;
             // 
-            // textBox8
+            // label20
             // 
-            this.textBox8.Location = new System.Drawing.Point(172, 11);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(40, 23);
-            this.textBox8.TabIndex = 2;
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label20.Location = new System.Drawing.Point(12, 11);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(23, 19);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "to";
+            // 
+            // radioButton_Act_place_drip
+            // 
+            this.radioButton_Act_place_drip.AutoSize = true;
+            this.radioButton_Act_place_drip.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_place_drip.Location = new System.Drawing.Point(41, 38);
+            this.radioButton_Act_place_drip.Name = "radioButton_Act_place_drip";
+            this.radioButton_Act_place_drip.Size = new System.Drawing.Size(87, 23);
+            this.radioButton_Act_place_drip.TabIndex = 1;
+            this.radioButton_Act_place_drip.Text = "drip tray";
+            this.radioButton_Act_place_drip.UseVisualStyleBackColor = true;
             // 
             // textBox9
             // 
@@ -1085,44 +1009,132 @@
             this.textBox9.Size = new System.Drawing.Size(40, 23);
             this.textBox9.TabIndex = 2;
             // 
-            // panel7
+            // textBox8
             // 
-            this.panel7.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel7.Controls.Add(this.label18);
-            this.panel7.Location = new System.Drawing.Point(136, 239);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(127, 33);
-            this.panel7.TabIndex = 3;
+            this.textBox8.Location = new System.Drawing.Point(172, 11);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(40, 23);
+            this.textBox8.TabIndex = 2;
             // 
-            // button_simulateAddAct
+            // textBox1
             // 
-            this.button_simulateAddAct.Location = new System.Drawing.Point(420, 13);
-            this.button_simulateAddAct.Name = "button_simulateAddAct";
-            this.button_simulateAddAct.Size = new System.Drawing.Size(149, 265);
-            this.button_simulateAddAct.TabIndex = 4;
-            this.button_simulateAddAct.Text = "Add to action base";
-            this.button_simulateAddAct.UseVisualStyleBackColor = true;
-            this.button_simulateAddAct.Click += new System.EventHandler(this.button_simulateAddAct_Click);
+            this.textBox1.Location = new System.Drawing.Point(130, 11);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(40, 23);
+            this.textBox1.TabIndex = 2;
             // 
-            // button_clearActionBase
+            // panel4
             // 
-            this.button_clearActionBase.Location = new System.Drawing.Point(10, 559);
-            this.button_clearActionBase.Name = "button_clearActionBase";
-            this.button_clearActionBase.Size = new System.Drawing.Size(75, 23);
-            this.button_clearActionBase.TabIndex = 4;
-            this.button_clearActionBase.Text = "clear";
-            this.button_clearActionBase.UseVisualStyleBackColor = true;
-            this.button_clearActionBase.Click += new System.EventHandler(this.button_clearActionBase_Click);
+            this.panel4.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel4.Controls.Add(this.radioButton_Act_pick_cup1);
+            this.panel4.Controls.Add(this.label17);
+            this.panel4.Controls.Add(this.radioButton_Act_pick_cup2);
+            this.panel4.Location = new System.Drawing.Point(135, 17);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(110, 67);
+            this.panel4.TabIndex = 3;
             // 
-            // button_creatAction
+            // radioButton_Act_pick_cup1
             // 
-            this.button_creatAction.Location = new System.Drawing.Point(282, 229);
-            this.button_creatAction.Name = "button_creatAction";
-            this.button_creatAction.Size = new System.Drawing.Size(143, 65);
-            this.button_creatAction.TabIndex = 5;
-            this.button_creatAction.Text = "Creat action";
-            this.button_creatAction.UseVisualStyleBackColor = true;
-            this.button_creatAction.Click += new System.EventHandler(this.button_creatAction_Click);
+            this.radioButton_Act_pick_cup1.AutoSize = true;
+            this.radioButton_Act_pick_cup1.Checked = true;
+            this.radioButton_Act_pick_cup1.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_pick_cup1.Location = new System.Drawing.Point(55, 9);
+            this.radioButton_Act_pick_cup1.Name = "radioButton_Act_pick_cup1";
+            this.radioButton_Act_pick_cup1.Size = new System.Drawing.Size(46, 23);
+            this.radioButton_Act_pick_cup1.TabIndex = 1;
+            this.radioButton_Act_pick_cup1.TabStop = true;
+            this.radioButton_Act_pick_cup1.Text = "(B)";
+            this.radioButton_Act_pick_cup1.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label17.Location = new System.Drawing.Point(12, 11);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(37, 19);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Cup";
+            // 
+            // radioButton_Act_pick_cup2
+            // 
+            this.radioButton_Act_pick_cup2.AutoSize = true;
+            this.radioButton_Act_pick_cup2.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_pick_cup2.Location = new System.Drawing.Point(55, 38);
+            this.radioButton_Act_pick_cup2.Name = "radioButton_Act_pick_cup2";
+            this.radioButton_Act_pick_cup2.Size = new System.Drawing.Size(46, 23);
+            this.radioButton_Act_pick_cup2.TabIndex = 1;
+            this.radioButton_Act_pick_cup2.Text = "(P)";
+            this.radioButton_Act_pick_cup2.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.radioButton_Act_pick);
+            this.panel1.Controls.Add(this.radioButton_Act_place);
+            this.panel1.Controls.Add(this.radioButton_Act_trigger);
+            this.panel1.Controls.Add(this.radioButton_Act_pour);
+            this.panel1.Location = new System.Drawing.Point(29, 17);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(101, 261);
+            this.panel1.TabIndex = 3;
+            // 
+            // radioButton_Act_pick
+            // 
+            this.radioButton_Act_pick.AutoSize = true;
+            this.radioButton_Act_pick.Checked = true;
+            this.radioButton_Act_pick.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_pick.Location = new System.Drawing.Point(16, 25);
+            this.radioButton_Act_pick.Name = "radioButton_Act_pick";
+            this.radioButton_Act_pick.Size = new System.Drawing.Size(55, 23);
+            this.radioButton_Act_pick.TabIndex = 1;
+            this.radioButton_Act_pick.TabStop = true;
+            this.radioButton_Act_pick.Text = "pick";
+            this.radioButton_Act_pick.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Act_place
+            // 
+            this.radioButton_Act_place.AutoSize = true;
+            this.radioButton_Act_place.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_place.Location = new System.Drawing.Point(16, 98);
+            this.radioButton_Act_place.Name = "radioButton_Act_place";
+            this.radioButton_Act_place.Size = new System.Drawing.Size(63, 23);
+            this.radioButton_Act_place.TabIndex = 1;
+            this.radioButton_Act_place.Text = "place";
+            this.radioButton_Act_place.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Act_trigger
+            // 
+            this.radioButton_Act_trigger.AutoSize = true;
+            this.radioButton_Act_trigger.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_trigger.Location = new System.Drawing.Point(16, 227);
+            this.radioButton_Act_trigger.Name = "radioButton_Act_trigger";
+            this.radioButton_Act_trigger.Size = new System.Drawing.Size(76, 23);
+            this.radioButton_Act_trigger.TabIndex = 1;
+            this.radioButton_Act_trigger.Text = "trigger";
+            this.radioButton_Act_trigger.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Act_pour
+            // 
+            this.radioButton_Act_pour.AutoSize = true;
+            this.radioButton_Act_pour.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_pour.Location = new System.Drawing.Point(16, 166);
+            this.radioButton_Act_pour.Name = "radioButton_Act_pour";
+            this.radioButton_Act_pour.Size = new System.Drawing.Size(60, 23);
+            this.radioButton_Act_pour.TabIndex = 1;
+            this.radioButton_Act_pour.Text = "pour";
+            this.radioButton_Act_pour.UseVisualStyleBackColor = true;
+            // 
+            // button_inputAct
+            // 
+            this.button_inputAct.Location = new System.Drawing.Point(29, 371);
+            this.button_inputAct.Name = "button_inputAct";
+            this.button_inputAct.Size = new System.Drawing.Size(114, 92);
+            this.button_inputAct.TabIndex = 5;
+            this.button_inputAct.Text = "input act";
+            this.button_inputAct.UseVisualStyleBackColor = true;
+            this.button_inputAct.Click += new System.EventHandler(this.button_inputAct_Click);
             // 
             // Form1
             // 
@@ -1131,7 +1143,7 @@
             this.ClientSize = new System.Drawing.Size(1421, 780);
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.tabControl1);
-            this.Font = new System.Drawing.Font("Microsoft JhengHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -1155,16 +1167,16 @@
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.imageBox_realsenseMix)).EndInit();
             this.tabPage5.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1265,6 +1277,7 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button_clearActionBase;
         private System.Windows.Forms.Button button_creatAction;
+        private System.Windows.Forms.Button button_inputAct;
     }
 }
 

@@ -12,6 +12,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -249,10 +250,12 @@ namespace CS_coffeeMakerVer2
         static Mat camImg1 = new Mat();
         static Mat camImg2 = new Mat();
         static Mat camImg3 = new Mat();
-        VideoCapture webCam1 = new VideoCapture(1);
+        VideoCapture webCam1;// = new VideoCapture("Act//S13.avi");
         //VideoCapture webCam2 = new VideoCapture(1);
         static YoloWrapper yoloWrapper;
         static IEnumerable<YoloItem> items;
+     StreamWriter obj_state =  new StreamWriter($"act//obj_state.txt", false);
+
         private void imageBox1_Click(object sender, EventArgs e)
         {
             yoloWrapper = new YoloWrapper("modle\\yolov3-tiny-3obj.cfg", "modle\\yolov3-tiny-3obj_3cup.weights", "modle\\obj.names");
@@ -260,9 +263,8 @@ namespace CS_coffeeMakerVer2
             if (!string.IsNullOrEmpty(yoloWrapper.EnvironmentReport.GraphicDeviceName))
                 detectionSystemDetail = $"({yoloWrapper.EnvironmentReport.GraphicDeviceName})";
             Console.WriteLine($"Detection System:{yoloWrapper.DetectionSystem}{detectionSystemDetail}");
-
+            webCam1 = new VideoCapture("Act//S13.avi");
             Task.Run(() => loop1());
-            //Task.Run(() => loop2());
 
             void loop1()
             {
@@ -272,7 +274,10 @@ namespace CS_coffeeMakerVer2
                 cup[1].gripOffset_M_x = 0.04f;
                 while (true)
                 {
-                    camImg1 = webCam1.QueryFrame();
+                    // camImg1 = webCam1.QueryFrame();
+                    Thread.Sleep(100);
+                    webCam1.Read(camImg1);
+
                     CvInvoke.Imwrite("yolo1.png", camImg1);
                     items = yoloWrapper.Detect(@"yolo1.png");
                     bool[] getCup = new bool[cup.Count()];
@@ -548,6 +553,15 @@ namespace CS_coffeeMakerVer2
                 }
             }
             action.execute();
+
+        }
+
+        private void button_inputAct_Click(object sender, EventArgs e)
+        {
+            VideoCapture video = new VideoCapture("Act//S13.avi");
+
+            string[] actDetect = System.IO.File.ReadAllLines($"Act//act_output.txt");
+
 
         }
     }//class form
