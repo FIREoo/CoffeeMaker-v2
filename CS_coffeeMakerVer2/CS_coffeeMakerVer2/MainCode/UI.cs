@@ -8,11 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CS_coffeeMakerVer2.MainCode
+namespace CS_coffeeMakerVer2
 {
-    class UI : Form1
+    public partial class Form1 : Form
     {
-     
+        private void button_setCam_Click(object sender, EventArgs e)
+        {
+            MainCode.Form_camSetting setForm = new MainCode.Form_camSetting();
+            setForm.ShowDialog();
+        }
 
     }
 }

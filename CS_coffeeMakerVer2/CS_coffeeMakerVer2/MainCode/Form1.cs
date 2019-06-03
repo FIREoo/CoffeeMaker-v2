@@ -5,6 +5,7 @@ using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Intel.RealSense;
+using myEmguLibrary;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,7 +13,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -24,11 +24,15 @@ namespace CS_coffeeMakerVer2
         Object[] cup = new Object[2];
 
 
+
         public Form1()
         {
             InitializeComponent();
             for (int i = 0; i < cup.Count(); i++)
                 cup[i] = new Object();
+
+            cup[0].Name = "blue cup";
+            cup[1].Name = "pink cup";
         }
 
         //UI
@@ -69,6 +73,8 @@ namespace CS_coffeeMakerVer2
                 btn_Ljog[i].MouseDown += new MouseEventHandler(OnClick_jog);
             }
         }
+
+
 
 
         private void readPosPathFile()
@@ -247,117 +253,170 @@ namespace CS_coffeeMakerVer2
             }
         }
 
+        #region video capture
         static Mat camImg1 = new Mat();
-        static Mat camImg2 = new Mat();
-        static Mat camImg3 = new Mat();
-        VideoCapture webCam1;// = new VideoCapture("Act//S13.avi");
-        //VideoCapture webCam2 = new VideoCapture(1);
+        //VideoCapture webCam1 = new VideoCapture("Act\\T13.avi");
+        VideoCapture webCam1;
         static YoloWrapper yoloWrapper;
         static IEnumerable<YoloItem> items;
-     StreamWriter obj_state =  new StreamWriter($"act//obj_state.txt", false);
-
-        private void imageBox1_Click(object sender, EventArgs e)
-        {
-            yoloWrapper = new YoloWrapper("modle\\yolov3-tiny-3obj.cfg", "modle\\yolov3-tiny-3obj_3cup.weights", "modle\\obj.names");
-            string detectionSystemDetail = string.Empty;
-            if (!string.IsNullOrEmpty(yoloWrapper.EnvironmentReport.GraphicDeviceName))
-                detectionSystemDetail = $"({yoloWrapper.EnvironmentReport.GraphicDeviceName})";
-            Console.WriteLine($"Detection System:{yoloWrapper.DetectionSystem}{detectionSystemDetail}");
-            webCam1 = new VideoCapture("Act//S13.avi");
-            Task.Run(() => loop1());
-
-            void loop1()
-            {
-                Form_camSetting fcs = new Form_camSetting();
-                fcs.readSettings(1);
-                cup[0].gripOffset_M_x = 0.04f;
-                cup[1].gripOffset_M_x = 0.04f;
-                while (true)
-                {
-                    // camImg1 = webCam1.QueryFrame();
-                    Thread.Sleep(100);
-                    webCam1.Read(camImg1);
-
-                    CvInvoke.Imwrite("yolo1.png", camImg1);
-                    items = yoloWrapper.Detect(@"yolo1.png");
-                    bool[] getCup = new bool[cup.Count()];
-                    try
-                    {
-                        foreach (YoloItem item in items)
-                        {
-                            string name = item.Type;
-                            int x = item.X;
-                            int y = item.Y;
-                            int H = item.Height;
-                            int W = item.Width;
 
 
-                            CvInvoke.PutText(camImg1, name, new Point(x, y), FontFace.HersheySimplex, 1, new MCvScalar(50, 230, 230));
-                            CvInvoke.Rectangle(camImg1, new Rectangle(x, y, W, H), new MCvScalar(50, 230, 230), 3);
-
-                            if (item.Type == "blue cup")
-                            {
-                                getCup[0] = true;
-                                PointF centerBottom = new PointF(x + (W / 2), y + (H));
-                                CvInvoke.Circle(camImg1, new Point((int)centerBottom.X, (int)centerBottom.Y), 3, new MCvScalar(100, 230, 50), -1);
-                                correct(ref centerBottom);
-                                CvInvoke.Circle(camImg1, new Point((int)centerBottom.X, (int)centerBottom.Y), 3, new MCvScalar(50, 230, 50), -1);
-                                PointF Wpoint = fcs.I2W(centerBottom.X, centerBottom.Y, 0);
-                                cup[0].setZ_mm(Wpoint.X);
-                                cup[0].setX_mm(Wpoint.Y);
-                                cup[0].setY_mm(230);
-                            }
-                            else if (item.Type == "pink cup")
-                            {
-                                getCup[1] = true;
-                                PointF centerBottom = new PointF(x + (W / 2), y + (H));
-                                CvInvoke.Circle(camImg1, new Point((int)centerBottom.X, (int)centerBottom.Y), 3, new MCvScalar(100, 230, 50), -1);
-                                correct(ref centerBottom);
-                                CvInvoke.Circle(camImg1, new Point((int)centerBottom.X, (int)centerBottom.Y), 3, new MCvScalar(50, 230, 50), -1);
-                                PointF Wpoint = fcs.I2W(centerBottom.X, centerBottom.Y, 0);
-                                cup[1].setZ_mm(Wpoint.X);
-                                cup[1].setX_mm(Wpoint.Y);
-                                cup[1].setY_mm(230);
-                            }
-                        }
-                        imageBox1.Image = camImg1;
-                        CvInvoke.Imwrite("detect.png", camImg1);
-                    }
-                    catch
-                    {
-                        //Console.WriteLine("items null");
-                    }
-
-                    if (getCup[0])
-                        if (cup[0].State() == situation.move)
-                            this.Invoke((MethodInvoker)(() => label_Cup1_info.Text = "Moving : " + cup[0].moveDistanse().ToString("0.000")));
-                        else
-                            this.Invoke((MethodInvoker)(() => label_Cup1_info.Text = $"({cup[0].getX_m().ToString("0.000")},{cup[0].getY_m()},{cup[0].getZ_m().ToString("0.000")})"));
-                    else
-                        this.Invoke((MethodInvoker)(() => label_Cup1_info.Text = "Block"));
-
-                    if (getCup[1])
-                        if (cup[1].State() == situation.move)
-                            this.Invoke((MethodInvoker)(() => label_Cup2_info.Text = "Moving : " + cup[1].moveDistanse().ToString("0.000")));
-                        else
-                            this.Invoke((MethodInvoker)(() => label_Cup2_info.Text = $"({cup[1].getX_m().ToString("0.000")},{cup[1].getY_m()},{cup[1].getZ_m().ToString("0.000")})"));
-                    else
-                        this.Invoke((MethodInvoker)(() => label_Cup2_info.Text = "Block"));
-                }//while true
-            }
-
-        }
         private void correct(ref PointF P)
         {
             float v = 0;
             v = (320 - P.X) * 0.05f;
             P.X = P.X + v;
         }
-        private void button_setCam_Click(object sender, EventArgs e)
+        private static bool vidioLoop = false;
+        private void YOLO_detect(bool isLive, string actTxtFile = "")
         {
-            MainCode.Form_camSetting setForm = new MainCode.Form_camSetting();
-            setForm.ShowDialog();
+            yoloWrapper = new YoloWrapper("modle\\yolov3-tiny-3obj.cfg", "modle\\yolov3-tiny-3obj_3cup.weights", "modle\\obj.names");
+            string detectionSystemDetail = string.Empty;
+            if (!string.IsNullOrEmpty(yoloWrapper.EnvironmentReport.GraphicDeviceName))
+                detectionSystemDetail = $"({yoloWrapper.EnvironmentReport.GraphicDeviceName})";
+            Console.WriteLine($"Detection System:{yoloWrapper.DetectionSystem}{detectionSystemDetail}");
+
+            List<string> write = new List<string>();
+
+            Form_camSetting fcs = new Form_camSetting();
+            fcs.readSettings(1);
+            cup[0].gripOffset_M_x = 0.035f;
+            cup[1].gripOffset_M_x = 0.025f;
+            int f = 1;
+            vidioLoop = true;
+            while (vidioLoop)
+            {
+                if (isLive)
+                    camImg1 = webCam1.QueryFrame();
+                else
+                {
+                    webCam1.Read(camImg1);
+                    if (camImg1 == null)
+                        break;
+                }
+
+
+                CvInvoke.Imwrite("yolo1.png", camImg1);
+                try { items = yoloWrapper.Detect(@"yolo1.png"); }
+                catch { break; }
+
+                bool[] getCup = new bool[cup.Count()];
+                try
+                {
+                    foreach (YoloItem item in items)
+                    {
+                        string name = item.Type;
+                        int x = item.X;
+                        int y = item.Y;
+                        int H = item.Height;
+                        int W = item.Width;
+
+                        CvInvoke.PutText(camImg1, name, new Point(x, y), FontFace.HersheySimplex, 1, new MCvScalar(50, 230, 230));
+                        CvInvoke.Rectangle(camImg1, new Rectangle(x, y, W, H), new MCvScalar(50, 230, 230), 3);
+
+                        if (item.Type == "blue cup")
+                        {
+                            getCup[0] = true;
+                            PointF centerBottom = new PointF(x + (W / 2), y + (H));
+                            CvInvoke.Circle(camImg1, new Point((int)centerBottom.X, (int)centerBottom.Y), 3, new MCvScalar(100, 230, 50), -1);
+                            correct(ref centerBottom);
+                            CvInvoke.Circle(camImg1, new Point((int)centerBottom.X, (int)centerBottom.Y), 3, new MCvScalar(50, 230, 50), -1);
+                            PointF Wpoint = fcs.I2W(centerBottom.X, centerBottom.Y, 0);
+                            cup[0].setZ_mm(Wpoint.X);
+                            cup[0].setX_mm(Wpoint.Y);
+                            cup[0].setY_mm(230);
+                        }
+                        else if (item.Type == "pink cup")
+                        {
+                            getCup[1] = true;
+                            PointF centerBottom = new PointF(x + (W / 2), y + (H));
+                            CvInvoke.Circle(camImg1, new Point((int)centerBottom.X, (int)centerBottom.Y), 3, new MCvScalar(100, 230, 50), -1);
+                            correct(ref centerBottom);
+                            CvInvoke.Circle(camImg1, new Point((int)centerBottom.X, (int)centerBottom.Y), 3, new MCvScalar(50, 230, 50), -1);
+                            PointF Wpoint = fcs.I2W(centerBottom.X, centerBottom.Y, 0);
+                            cup[1].setZ_mm(Wpoint.X);
+                            cup[1].setX_mm(Wpoint.Y);
+                            cup[1].setY_mm(230);
+                        }
+                    }
+                    imageBox1.Image = camImg1;
+                    CvInvoke.Imwrite("detect.png", camImg1);
+                }
+                catch { }
+
+                //判斷物體有沒有移動 和 準備寫TXT
+                write.Add(f.ToString() + "\t");
+                if (getCup[0])
+                    if (cup[0].State() == situation.move)
+                    {
+                        this.Invoke((MethodInvoker)(() => label_Cup1_info.Text = "Moving : " + cup[0].moveDistanse().ToString("0.000")));
+                        write.Add("M");
+                    }
+                    else
+                    {
+                        string str = $"{cup[0].getX_m().ToString("0.000")},{cup[0].getY_m()},{cup[0].getZ_m().ToString("0.000")}";
+                        this.Invoke((MethodInvoker)(() => label_Cup1_info.Text = $"({str})"));
+                        write.Add(str);
+                    }
+                else
+                {
+                    this.Invoke((MethodInvoker)(() => label_Cup1_info.Text = "Block"));
+                    write.Add("B");
+                }
+
+                write.Add("\t");
+                if (getCup[1])
+                    if (cup[1].State() == situation.move)
+                    {
+                        this.Invoke((MethodInvoker)(() => label_Cup2_info.Text = "Moving : " + cup[1].moveDistanse().ToString("0.000")));
+                        write.Add("M");
+                    }
+                    else
+                    {
+                        string str = $"{cup[1].getX_m().ToString("0.000")},{cup[1].getY_m()},{cup[1].getZ_m().ToString("0.000")}";
+                        this.Invoke((MethodInvoker)(() => label_Cup2_info.Text = $"({str})"));
+                        write.Add(str);
+                    }
+                else
+                {
+                    this.Invoke((MethodInvoker)(() => label_Cup2_info.Text = "Block"));
+                    write.Add("B");
+                }
+                if (isLive)
+                    write.Clear();
+                f++;
+            }//while true
+
+            if (!isLive)
+            {
+                StreamWriter act_obj = new StreamWriter(actTxtFile, false);
+
+                act_obj.Write(f.ToString() + "\t");
+                foreach (string line in write)
+                    act_obj.WriteLine(line);
+                act_obj.Flush();
+                act_obj.Close();
+            }
         }
+
+
+        private void liveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            vidioLoop = false;
+            bool Livecase = true;
+            webCam1 = new VideoCapture(0);
+            Task.Run(() => YOLO_detect(Livecase));
+        }
+
+        private void videoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            vidioLoop = false;
+            bool Livecase = false;
+            webCam1 = new VideoCapture("Act\\T10.avi");
+            //contextMenuStrip_imgBox.Items[contextMenuStrip_imgBox.Items.IndexOf(videoToolStripMenuItem)].
+            Task.Run(() => YOLO_detect(Livecase, "Act\\10_act_obj.txt"));
+        }
+        #endregion video capture
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -419,11 +478,16 @@ namespace CS_coffeeMakerVer2
             //UR.goToPos(goC);
 
             Action action = new Action(UR, "test.path");
+
             action.add(Subact.Pick(cup[0]));
-           // action.add(Subact.Pour(cup[1]));
-           // action.add(Subact.Place("toDripTray"));
-           // action.add(Subact.Pick("outDripTray"));
-            //action.add(Subact.Place(new URCoordinates(0.240f, 0.23f, 0.0241f, 3.141f, 0, 0))); //position  p[0.2428418, 0.23, 0.02410359, 3.141593, 0, 0]
+            action.add(Subact.Pour(cup[1]));
+            action.add(Subact.Place(cup[0],new URCoordinates(0.353f, 0.23f, -0.170f, (float)(Math.PI), 0, 0)));
+            action.add(Subact.Pick(cup[1]));
+            action.add(Subact.Place(subactInfo.place.DripTray));
+            action.add(Subact.Trigger());
+            action.add(Subact.Pick(subactInfo.place.DripTray));
+            action.add(Subact.Place(cup[1],new URCoordinates(0.190f, 0.23f, -0.110f, (float)(Math.PI), 0, 0)));
+
             action.execute();
         }
 
@@ -448,6 +512,7 @@ namespace CS_coffeeMakerVer2
         }
         #endregion record
 
+        #region action
         private void button_simulateAddAct_Click(object sender, EventArgs e)
         {
             if (radioButton_Act_pick.Checked)
@@ -456,14 +521,21 @@ namespace CS_coffeeMakerVer2
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Pick");
-                    item1.SubItems.Add("blue cup");
+                    item1.SubItems.Add(cup[0].Name);
                     listView_actBase.Items.Add(item1);
                 }
                 else if (radioButton_Act_pick_cup2.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Pick");
-                    item1.SubItems.Add("pink cup");
+                    item1.SubItems.Add(cup[1].Name);
+                    listView_actBase.Items.Add(item1);
+                }
+                else if(radioButton_Act_pick_drip.Checked)
+                {
+                    ListViewItem item1 = new ListViewItem();
+                    item1.SubItems.Add("Pick");
+                    item1.SubItems.Add("from drip tray");
                     listView_actBase.Items.Add(item1);
                 }
             }
@@ -480,7 +552,7 @@ namespace CS_coffeeMakerVer2
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Place");
-                    item1.SubItems.Add("to Pos");
+                    item1.SubItems.Add($"to Pos {textBox_Px.Text} {textBox_Py.Text} {textBox_Pz.Text}");
                     listView_actBase.Items.Add(item1);
                 }
             }
@@ -490,21 +562,21 @@ namespace CS_coffeeMakerVer2
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Pour");
-                    item1.SubItems.Add("to blue cup");
+                    item1.SubItems.Add("to "+ cup[0].Name);
                     listView_actBase.Items.Add(item1);
                 }
                 else if (radioButton_Act_pour_to2.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Pour");
-                    item1.SubItems.Add("to pink cup");
+                    item1.SubItems.Add("to "+cup[1].Name);
                     listView_actBase.Items.Add(item1);
                 }
             }
             else if (radioButton_Act_trigger.Checked)
             {
                 ListViewItem item1 = new ListViewItem();
-                item1.SubItems.Add("Trigger");
+                item1.SubItems.Add("Toggle");
                 item1.SubItems.Add("coffee machine");
                 listView_actBase.Items.Add(item1);
             }
@@ -518,52 +590,152 @@ namespace CS_coffeeMakerVer2
         private void button_creatAction_Click(object sender, EventArgs e)
         {
             Action action = new Action(UR, "test.path");
-
-            for (int i = 0; i < listView_actBase.Items.Count; i++)
+            action.start(cup);
+            Object gripObj = new Object();
+            for (int i = 1; i < listView_actBase.Items.Count; i++)
             {
                 string act = listView_actBase.Items[i].SubItems[1].Text;
                 string obj = listView_actBase.Items[i].SubItems[2].Text;
 
+               
+
                 if (act == "Pick")
                 {
-                    if (obj == "blue cup")
+                    if (obj == cup[0].Name)
+                    {
                         action.add(Subact.Pick(cup[0]));
-                    else if (obj == "pink cup")
+                        gripObj = cup[0];
+                    }
+                    else if (obj == cup[1].Name)
+                    {
                         action.add(Subact.Pick(cup[1]));
-                    else if (obj == "on drip tray")
-                        action.add(Subact.Pick("outDripTray"));
+                        gripObj = cup[1];
+                    }
+                    else if (obj == "from drip tray")
+                        action.add(Subact.Pick(subactInfo.place.DripTray));
                 }
                 else if (act == "Place")
                 {
                     if (obj == "to drip tray")
-                        action.add(Subact.Place("toDripTray"));
-                    else if (obj == "to Pos")
-                        action.add(Subact.Place(new URCoordinates()));
+                        action.add(Subact.Place(subactInfo.place.DripTray));
+                    else if ( obj.IndexOf("to Pos") >=0 )
+                    {
+                        string[] tmp = obj.Substring(7).Split(' ');
+                        action.add(Subact.Place(gripObj, new URCoordinates(float.Parse(tmp[0]), float.Parse(tmp[1]), float.Parse(tmp[2]), (float)(Math.PI), 0, 0)));
+                    }
                 }
                 else if (act == "Pour")
                 {
-                    if (obj == "to blue cup")
+                    if (obj == "to "+ cup[0].Name)
                         action.add(Subact.Pour(cup[0]));
-                    else if (obj == "to pink cup")
+                    else if (obj == "to "+ cup[1].Name)
                         action.add(Subact.Pour(cup[1]));
                 }
-                else if (act == "Trigger")
+                else if (act == "Toggle")
                 {
                     action.add(Subact.Trigger());
                 }
             }
             action.execute();
 
-        }
+        }//action base list to action
 
-        private void button_inputAct_Click(object sender, EventArgs e)
+        private void button_sumulateAround_Click(object sender, EventArgs e)
         {
-            VideoCapture video = new VideoCapture("Act//S13.avi");
+            radioButton_Act_pick.Checked = true;
+            radioButton_Act_pick_cup2.Checked = true;
+            button_simulateAddAct_Click(null, null);
 
-            string[] actDetect = System.IO.File.ReadAllLines($"Act//act_output.txt");
+            radioButton_Act_place.Checked = true;
+            radioButton_Act_place_drip.Checked = true;
+            button_simulateAddAct_Click(null, null);
+
+            radioButton_Act_trigger.Checked = true;
+            button_simulateAddAct_Click(null, null);
+
+            radioButton_Act_pick.Checked = true;
+            radioButton_Act_pick_drip.Checked = true;
+            button_simulateAddAct_Click(null, null);
+
+            textBox_Px.Text = "0.355";
+            textBox_Py.Text = "0.23";
+            textBox_Pz.Text = "-0.12";
+            radioButton_Act_place.Checked = true;
+            radioButton_Act_place_pos.Checked = true;
+            button_simulateAddAct_Click(null, null);
+
+ 
+            radioButton_Act_pick.Checked = true;
+            radioButton_Act_pick_cup1.Checked = true;
+            button_simulateAddAct_Click(null, null);
+
+            radioButton_Act_pour.Checked = true;
+            radioButton_Act_pour_to2.Checked = true;
+            button_simulateAddAct_Click(null, null);
+
+            textBox_Px.Text = "0.285";
+            textBox_Py.Text = "0.23";
+            textBox_Pz.Text = "-0.311";
+            radioButton_Act_place.Checked = true;
+            radioButton_Act_place_pos.Checked = true;
+            button_simulateAddAct_Click(null, null);
+      
+        }
+        #endregion action
+
+        private void imageBox3_Click(object sender, EventArgs e)
+        {
+            string[] file = File.ReadAllLines($"Act\\10_act_output.txt");
+            Mat mat = new Mat(150, file.Count(), DepthType.Cv8U, 3);
+            MyInvoke.setToZero(ref mat);
+            for (int i = 0; i < file.Count(); i++)
+            {
+                int act = int.Parse(file[i].Split('\t')[1]);
+                if (act == 0)//PP              
+                    CvInvoke.Line(mat, new Point(10 + i, 25), new Point(10 + i, 75), new MCvScalar(200, 50, 50));
+                else if (act == 1)//switch
+                    CvInvoke.Line(mat, new Point(10 + i, 25), new Point(10 + i, 75), new MCvScalar(50, 200, 50));
+                else if (act == 2)//pour
+                    CvInvoke.Line(mat, new Point(10 + i, 25), new Point(10 + i, 75), new MCvScalar(50, 50, 200));
+            }
+
+            file = File.ReadAllLines($"Act\\10_act_obj.txt");
+            for (int i = 0; i < file.Count(); i++)
+            {
+                string bCup = file[i].Split('\t')[1];
+                string pCup = file[i].Split('\t')[2];
+                if (bCup == "M")
+                    CvInvoke.Line(mat, new Point(10 + i, 85), new Point(10 + i, 105), new MCvScalar(50, 200, 200));
+                else if (bCup == "B") { }
+                else
+                    CvInvoke.Line(mat, new Point(10 + i, 85), new Point(10 + i, 105), new MCvScalar(100, 100, 100));
+
+                if (pCup == "M")
+                    CvInvoke.Line(mat, new Point(10 + i, 110), new Point(10 + i, 130), new MCvScalar(50, 200, 200));
+                else if (pCup == "B") { }
+                else
+                    CvInvoke.Line(mat, new Point(10 + i, 110), new Point(10 + i, 130), new MCvScalar(100, 100, 100));
+            }
+
+            imageBox3.Image = mat;
+        }
+
+        private void contextMenuStrip_imgBox_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ToolStripMenuItem tmp = new ToolStripMenuItem();
+            tmp.Size = new System.Drawing.Size(180, 22);
+            tmp.Text = "Video";
+            tmp.Click += new System.EventHandler(this.videoToolStripMenuItem_Click);
+
+
+            videoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            tmp});
+
 
 
         }
+
+
     }//class form
 
 
@@ -576,6 +748,7 @@ namespace CS_coffeeMakerVer2
     }
     class Object
     {
+        public string Name = "";
         private const int fileterSize = 10;
         private List<float> x = new List<float>();//unit M
         private List<float> y = new List<float>();//unit M
@@ -587,6 +760,18 @@ namespace CS_coffeeMakerVer2
         public float gripOffset_M_x = 0;
         public float gripOffset_M_y = 0;
         public float gripOffset_M_z = 0;
+        private URCoordinates nowPos = new URCoordinates();//再action中 可能因為中間移動過 所以必須記錄移動後的位置 以免之後抓空
+
+        public void saveNowPos()
+        {
+            nowPos =  new URCoordinates(getX_m(), getY_m() , getZ_m() , 0, 0, 0);
+        }
+        public void setNowPos(URCoordinates urc)
+        {
+            nowPos = new URCoordinates(urc);
+        }
+
+
         private int[] filterIndex = new[] { 0, 0, 0 };
         public void setX_mm(float x_mm)
         {
@@ -624,9 +809,10 @@ namespace CS_coffeeMakerVer2
         public URCoordinates gripPos(int deg = 0)
         {
             if (deg == 0)
-                return new URCoordinates(getX_m() + gripOffset_M_x, getY_m() + gripOffset_M_y, getZ_m() + gripOffset_M_z, (float)(Math.PI), 0, 0);
+                return new URCoordinates(nowPos.X + gripOffset_M_x, nowPos.Y + gripOffset_M_y, nowPos.Z + gripOffset_M_z, (float)(Math.PI), 0, 0);
             throw new System.ArgumentException("未完成", "現在只能水平");
         }
+
         private float avg(List<float> v, int startIndex, int count)
         {
             if (v.Count < 10)
