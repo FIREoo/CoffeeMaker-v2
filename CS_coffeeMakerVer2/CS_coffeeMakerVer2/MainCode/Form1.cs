@@ -37,48 +37,6 @@ namespace CS_coffeeMakerVer2
             cup[1].Name = "pink cup";
         }
 
-        //UI
-        public void creatJogButton()
-        {
-            //Right
-            Button[] btn_Rjog = new Button[7];
-            btn_Rjog[0] = new Button();
-            btn_Rjog[0].Text = "+  ||  –";
-            btn_Rjog[0].Size = new Size(55, 23);
-            btn_Rjog[0].Location = new Point(textBox_Rarm_Xpos.Location.X + textBox_Rarm_Xpos.Size.Width, textBox_Rarm_Xpos.Location.Y);
-            tabPage1.Controls.Add(btn_Rjog[0]);
-            btn_Rjog[0].MouseDown += new MouseEventHandler(OnClick_jog);
-            for (int i = 1; i < 7; i++)
-            {
-                btn_Rjog[i] = new Button();
-                btn_Rjog[i].Text = "+  ||  –";
-                btn_Rjog[i].Size = new Size(55, 23);
-                btn_Rjog[i].Location = new Point(btn_Rjog[i - 1].Location.X, btn_Rjog[i - 1].Location.Y + btn_Rjog[i - 1].Size.Height + 3);
-                tabPage1.Controls.Add(btn_Rjog[i]);
-                btn_Rjog[i].MouseDown += new MouseEventHandler(OnClick_jog);
-            }
-            //Left
-            Button[] btn_Ljog = new Button[7];
-            btn_Ljog[0] = new Button();
-            btn_Ljog[0].Text = "+  ||  –";
-            btn_Ljog[0].Size = new Size(55, 23);
-            btn_Ljog[0].Location = new Point(textBox_Larm_Xpos.Location.X + textBox_Larm_Xpos.Size.Width, textBox_Larm_Xpos.Location.Y);
-            tabPage1.Controls.Add(btn_Ljog[0]);
-            btn_Ljog[0].MouseDown += new MouseEventHandler(OnClick_jog);
-            for (int i = 1; i < 7; i++)
-            {
-                btn_Ljog[i] = new Button();
-                btn_Ljog[i].Text = "+  ||  –";
-                btn_Ljog[i].Size = new Size(55, 23);
-                btn_Ljog[i].Location = new Point(btn_Ljog[i - 1].Location.X, btn_Ljog[i - 1].Location.Y + btn_Ljog[i - 1].Size.Height + 3);
-                tabPage1.Controls.Add(btn_Ljog[i]);
-                btn_Ljog[i].MouseDown += new MouseEventHandler(OnClick_jog);
-            }
-        }
-
-
-
-
         private void readPosPathFile()
         {
             comboBox_LselectPos.Items.Clear();
@@ -257,12 +215,10 @@ namespace CS_coffeeMakerVer2
 
         #region video capture
         static Mat camImg1 = new Mat();
-        //VideoCapture webCam1 = new VideoCapture("Act\\T13.avi");
         VideoCapture webCam1;
         static YoloWrapper yoloWrapper;
         static IEnumerable<YoloItem> items;
-
-
+       static int videoIndex = 10;
         private void correct(ref PointF P)
         {
             float v = 0;
@@ -272,7 +228,7 @@ namespace CS_coffeeMakerVer2
         private static bool vidioLoop = false;
         private void YOLO_detect(bool isLive, string actTxtFile = "")
         {
-            yoloWrapper = new YoloWrapper("modle\\yolov3-tiny-3obj.cfg", "modle\\yolov3-tiny-3obj_3cup.weights", "modle\\obj.names");
+            yoloWrapper = new YoloWrapper("modle\\yolov3-tiny-2obj.cfg", "modle\\yolov3-tiny-2obj_2cup.weights", "modle\\obj.names");
             string detectionSystemDetail = string.Empty;
             if (!string.IsNullOrEmpty(yoloWrapper.EnvironmentReport.GraphicDeviceName))
                 detectionSystemDetail = $"({yoloWrapper.EnvironmentReport.GraphicDeviceName})";
@@ -286,6 +242,7 @@ namespace CS_coffeeMakerVer2
             cup[1].gripOffset_M_x = 0.025f;
             int f = 1;
             vidioLoop = true;
+
             while (vidioLoop)
             {
                 if (isLive)
@@ -296,7 +253,6 @@ namespace CS_coffeeMakerVer2
                     if (camImg1 == null)
                         break;
                 }
-
 
                 CvInvoke.Imwrite("yolo1.png", camImg1);
                 try { items = yoloWrapper.Detect(@"yolo1.png"); }
@@ -314,6 +270,7 @@ namespace CS_coffeeMakerVer2
                         int W = item.Width;
 
                         CvInvoke.PutText(camImg1, name, new Point(x, y), FontFace.HersheySimplex, 1, new MCvScalar(50, 230, 230));
+                        CvInvoke.PutText(camImg1, item.Confidence.ToString("0.0"), new Point(x, y-10), FontFace.HersheySimplex, 0.5, new MCvScalar(50, 230, 230));
                         CvInvoke.Rectangle(camImg1, new Rectangle(x, y, W, H), new MCvScalar(50, 230, 230), 3);
 
                         if (item.Type == "blue cup")
@@ -347,45 +304,48 @@ namespace CS_coffeeMakerVer2
                 catch { }
 
                 //判斷物體有沒有移動 和 準備寫TXT
-                write.Add(f.ToString() + "\t");
+                string tmp_write = "";
+                tmp_write += f.ToString() + "\t";
                 if (getCup[0])
                     if (cup[0].State() == situation.move)
                     {
                         this.Invoke((MethodInvoker)(() => label_Cup1_info.Text = "Moving : " + cup[0].moveDistanse().ToString("0.000")));
-                        write.Add("M");
+                        tmp_write += "M";
                     }
                     else
                     {
                         string str = $"{cup[0].getX_m().ToString("0.000")},{cup[0].getY_m()},{cup[0].getZ_m().ToString("0.000")}";
                         this.Invoke((MethodInvoker)(() => label_Cup1_info.Text = $"({str})"));
-                        write.Add(str);
+                        tmp_write += str;
                     }
                 else
                 {
                     this.Invoke((MethodInvoker)(() => label_Cup1_info.Text = "Block"));
-                    write.Add("B");
+                    tmp_write += "B";
                 }
 
-                write.Add("\t");
+                tmp_write += "\t";
                 if (getCup[1])
                     if (cup[1].State() == situation.move)
                     {
                         this.Invoke((MethodInvoker)(() => label_Cup2_info.Text = "Moving : " + cup[1].moveDistanse().ToString("0.000")));
-                        write.Add("M");
+                        tmp_write += "M";
                     }
                     else
                     {
                         string str = $"{cup[1].getX_m().ToString("0.000")},{cup[1].getY_m()},{cup[1].getZ_m().ToString("0.000")}";
                         this.Invoke((MethodInvoker)(() => label_Cup2_info.Text = $"({str})"));
-                        write.Add(str);
+                        tmp_write += str;
                     }
                 else
                 {
                     this.Invoke((MethodInvoker)(() => label_Cup2_info.Text = "Block"));
-                    write.Add("B");
+                    tmp_write+="B";
                 }
                 if (isLive)
                     write.Clear();
+                else
+                    write.Add(tmp_write);
                 f++;
             }//while true
 
@@ -412,11 +372,34 @@ namespace CS_coffeeMakerVer2
 
         private void videoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ToolStripMenuItem click = (ToolStripMenuItem)sender;
+            videoIndex = int.Parse(click.Text.Split('_')[0]);
+
             vidioLoop = false;
             bool Livecase = false;
-            webCam1 = new VideoCapture("Act\\T10.avi");
-            //contextMenuStrip_imgBox.Items[contextMenuStrip_imgBox.Items.IndexOf(videoToolStripMenuItem)].
-            Task.Run(() => YOLO_detect(Livecase, "Act\\10_act_obj.txt"));
+            webCam1 = new VideoCapture($"Act\\T{videoIndex}.avi");
+            Task.Run(() => YOLO_detect(Livecase, $"Act\\{videoIndex}_act_obj.txt"));
+        }
+        private void contextMenuStrip_imgBox_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DirectoryInfo ActFolder = new DirectoryInfo(@"Act");
+            FileInfo[] ActFiles = ActFolder.GetFiles("*_act_output.txt");
+            foreach (FileInfo file in ActFiles)
+            {
+                ToolStripMenuItem tmp = new ToolStripMenuItem();
+                tmp.Size = new System.Drawing.Size(180, 22);
+                tmp.Text = file.Name;
+                tmp.Click += new System.EventHandler(this.videoToolStripMenuItem_Click);
+
+                videoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            tmp});
+            }
+
+
+          
+
+
+
         }
         #endregion video capture
 
@@ -685,9 +668,10 @@ namespace CS_coffeeMakerVer2
         }
         #endregion action
 
+      
         private void imageBox3_Click(object sender, EventArgs e)
         {
-            string[] file = File.ReadAllLines($"Act\\10_act_output.txt");
+            string[] file = File.ReadAllLines($"Act\\{videoIndex}_act_output.txt");
             Mat mat = new Mat(150, file.Count(), DepthType.Cv8U, 3);
             MyInvoke.setToZero(ref mat);
             for (int i = 0; i < file.Count(); i++)
@@ -722,20 +706,7 @@ namespace CS_coffeeMakerVer2
             imageBox3.Image = mat;
         }
 
-        private void contextMenuStrip_imgBox_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            ToolStripMenuItem tmp = new ToolStripMenuItem();
-            tmp.Size = new System.Drawing.Size(180, 22);
-            tmp.Text = "Video";
-            tmp.Click += new System.EventHandler(this.videoToolStripMenuItem_Click);
-
-
-            videoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            tmp});
-
-
-
-        }
+      
 
 
     }//class form

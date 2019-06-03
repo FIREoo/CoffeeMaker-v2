@@ -56,7 +56,43 @@ namespace CS_coffeeMakerVer2
             rb.Act.Pour.toCup2 = radioButton_Act_pour_to2;
             rb.Act.trigger = radioButton_Act_trigger;
         }
-
+        public void creatJogButton()
+        {
+            //Right
+            Button[] btn_Rjog = new Button[7];
+            btn_Rjog[0] = new Button();
+            btn_Rjog[0].Text = "+  ||  –";
+            btn_Rjog[0].Size = new Size(55, 23);
+            btn_Rjog[0].Location = new Point(textBox_Rarm_Xpos.Location.X + textBox_Rarm_Xpos.Size.Width, textBox_Rarm_Xpos.Location.Y);
+            tabPage1.Controls.Add(btn_Rjog[0]);
+            btn_Rjog[0].MouseDown += new MouseEventHandler(OnClick_jog);
+            for (int i = 1; i < 7; i++)
+            {
+                btn_Rjog[i] = new Button();
+                btn_Rjog[i].Text = "+  ||  –";
+                btn_Rjog[i].Size = new Size(55, 23);
+                btn_Rjog[i].Location = new Point(btn_Rjog[i - 1].Location.X, btn_Rjog[i - 1].Location.Y + btn_Rjog[i - 1].Size.Height + 3);
+                tabPage1.Controls.Add(btn_Rjog[i]);
+                btn_Rjog[i].MouseDown += new MouseEventHandler(OnClick_jog);
+            }
+            //Left
+            Button[] btn_Ljog = new Button[7];
+            btn_Ljog[0] = new Button();
+            btn_Ljog[0].Text = "+  ||  –";
+            btn_Ljog[0].Size = new Size(55, 23);
+            btn_Ljog[0].Location = new Point(textBox_Larm_Xpos.Location.X + textBox_Larm_Xpos.Size.Width, textBox_Larm_Xpos.Location.Y);
+            tabPage1.Controls.Add(btn_Ljog[0]);
+            btn_Ljog[0].MouseDown += new MouseEventHandler(OnClick_jog);
+            for (int i = 1; i < 7; i++)
+            {
+                btn_Ljog[i] = new Button();
+                btn_Ljog[i].Text = "+  ||  –";
+                btn_Ljog[i].Size = new Size(55, 23);
+                btn_Ljog[i].Location = new Point(btn_Ljog[i - 1].Location.X, btn_Ljog[i - 1].Location.Y + btn_Ljog[i - 1].Size.Height + 3);
+                tabPage1.Controls.Add(btn_Ljog[i]);
+                btn_Ljog[i].MouseDown += new MouseEventHandler(OnClick_jog);
+            }
+        }
 
         private void button_setCam_Click(object sender, EventArgs e)
         {
