@@ -31,6 +31,8 @@ namespace CS_coffeeMakerVer2
             for (int i = 0; i < cup.Count(); i++)
                 cup[i] = new Object();
 
+            renameControl();
+
             cup[0].Name = "blue cup";
             cup[1].Name = "pink cup";
         }
@@ -515,23 +517,23 @@ namespace CS_coffeeMakerVer2
         #region action
         private void button_simulateAddAct_Click(object sender, EventArgs e)
         {
-            if (radioButton_Act_pick.Checked)
+            if (rb.Act.pick.Checked)
             {
-                if (radioButton_Act_pick_cup1.Checked)
+                if (rb.Act.Pick.cup1.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Pick");
                     item1.SubItems.Add(cup[0].Name);
                     listView_actBase.Items.Add(item1);
                 }
-                else if (radioButton_Act_pick_cup2.Checked)
+                else if (rb.Act.Pick.cup2.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Pick");
                     item1.SubItems.Add(cup[1].Name);
                     listView_actBase.Items.Add(item1);
                 }
-                else if(radioButton_Act_pick_drip.Checked)
+                else if(rb.Act.Pick.fromDrip.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Pick");
@@ -539,9 +541,9 @@ namespace CS_coffeeMakerVer2
                     listView_actBase.Items.Add(item1);
                 }
             }
-            else if (radioButton_Act_place.Checked)
+            else if (rb.Act.place.Checked)
             {
-                if (radioButton_Act_place_drip.Checked)
+                if (rb.Act.Place.toDrip.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Place");
@@ -556,16 +558,16 @@ namespace CS_coffeeMakerVer2
                     listView_actBase.Items.Add(item1);
                 }
             }
-            else if (radioButton_Act_pour.Checked)
+            else if (rb.Act.pour.Checked)
             {
-                if (radioButton_Act_pour_to1.Checked)
+                if (rb.Act.Pour.toCup1.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Pour");
                     item1.SubItems.Add("to "+ cup[0].Name);
                     listView_actBase.Items.Add(item1);
                 }
-                else if (radioButton_Act_pour_to2.Checked)
+                else if (rb.Act.Pour.toCup2.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
                     item1.SubItems.Add("Pour");
@@ -573,7 +575,7 @@ namespace CS_coffeeMakerVer2
                     listView_actBase.Items.Add(item1);
                 }
             }
-            else if (radioButton_Act_trigger.Checked)
+            else if (rb.Act.trigger.Checked)
             {
                 ListViewItem item1 = new ListViewItem();
                 item1.SubItems.Add("Toggle");
@@ -642,42 +644,42 @@ namespace CS_coffeeMakerVer2
 
         private void button_sumulateAround_Click(object sender, EventArgs e)
         {
-            radioButton_Act_pick.Checked = true;
-            radioButton_Act_pick_cup2.Checked = true;
+            rb.Act.pick.Checked = true;
+            rb.Act.Pick.cup2.Checked = true;
             button_simulateAddAct_Click(null, null);
 
-            radioButton_Act_place.Checked = true;
-            radioButton_Act_place_drip.Checked = true;
+            rb.Act.place.Checked = true;
+            rb.Act.Place.toDrip.Checked = true;
             button_simulateAddAct_Click(null, null);
 
-            radioButton_Act_trigger.Checked = true;
+            rb.Act.trigger.Checked = true;
             button_simulateAddAct_Click(null, null);
 
-            radioButton_Act_pick.Checked = true;
-            radioButton_Act_pick_drip.Checked = true;
+            rb.Act.pick.Checked = true;
+            rb.Act.Pick.fromDrip.Checked = true;
             button_simulateAddAct_Click(null, null);
 
             textBox_Px.Text = "0.355";
             textBox_Py.Text = "0.23";
             textBox_Pz.Text = "-0.12";
-            radioButton_Act_place.Checked = true;
-            radioButton_Act_place_pos.Checked = true;
+            rb.Act.place.Checked = true;
+            rb.Act.Place.toPos.Checked = true;
             button_simulateAddAct_Click(null, null);
 
  
-            radioButton_Act_pick.Checked = true;
-            radioButton_Act_pick_cup1.Checked = true;
+            rb.Act.pick.Checked = true;
+            rb.Act.Pick.cup1.Checked = true;
             button_simulateAddAct_Click(null, null);
 
-            radioButton_Act_pour.Checked = true;
-            radioButton_Act_pour_to2.Checked = true;
+            rb.Act.pour.Checked = true;
+            rb.Act.Pour.toCup2.Checked = true;
             button_simulateAddAct_Click(null, null);
 
             textBox_Px.Text = "0.285";
             textBox_Py.Text = "0.23";
             textBox_Pz.Text = "-0.311";
-            radioButton_Act_place.Checked = true;
-            radioButton_Act_place_pos.Checked = true;
+            rb.Act.place.Checked = true;
+            rb.Act.Place.toPos.Checked = true;
             button_simulateAddAct_Click(null, null);
       
         }
