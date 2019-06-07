@@ -46,7 +46,7 @@ namespace CS_coffeeMakerVer2
         }
         public void start(Object[] cups)
         {
-            foreach(Object cup in cups)
+            foreach (Object cup in cups)
             {
                 cup.saveNowPos();
             }
@@ -103,7 +103,7 @@ namespace CS_coffeeMakerVer2
 
             return rtn;
         }
-        public static subactInfo Place(Object cup,URCoordinates Wpoint)
+        public static subactInfo Place(Object cup, URCoordinates Wpoint)
         {
             cup.setNowPos(Wpoint);
 
@@ -171,9 +171,87 @@ namespace CS_coffeeMakerVer2
         public static subactInfo Trigger()
         {
             subactInfo rtn = new subactInfo();
-                rtn.AddFile("Path//trigger.path");
+            rtn.AddFile("Path//trigger.path");
             return rtn;
         }
+        public static subactInfo Scoop()
+        {
+            subactInfo rtn = new subactInfo();
+            rtn.AddFile("Path//Scoop.path");
+            return rtn;
+        }
+        public static subactInfo Stir(Object toCup)
+        {
+            subactInfo rtn = new subactInfo();
+            URCoordinates up = new URCoordinates(toCup.gripPos());
+            up.X -= 0.015f;
+            up.Z += 0.015f;
+            up.Y -= 0.06f;//上升
+            URCoordinates now = new URCoordinates(up);
+            rtn.infotxt.Add("pmovej");
+            rtn.infotxt.Add(up.ToPos());
+            now.Y += 0.05f;//下去
+
+            now.X -= 0.01f;
+            rtn.infotxt.Add(now.ToPos());
+            now.X += 0.01f;
+            now.Z += 0.01f;
+            rtn.infotxt.Add(now.ToPos());
+            now.X += 0.01f;
+            now.Z -= 0.01f;
+            rtn.infotxt.Add(now.ToPos());
+            now.X -= 0.01f;
+            now.Z -= 0.01f;
+            rtn.infotxt.Add(now.ToPos());
+            now.X -= 0.01f;
+            now.Z += 0.01f;
+            rtn.infotxt.Add(now.ToPos());
+            rtn.infotxt.Add(up.ToPos());
+            return rtn;
+        }
+        public static subactInfo AddaSpoon(Object toCup)
+        {
+            subactInfo rtn = new subactInfo();
+            URCoordinates up = new URCoordinates(toCup.gripPos());
+            up.Rx = 2.2f;
+            up.Ry = -2.2f;
+            up.Rz = 0;          
+            up.X -= 0.09f;
+            up.Z += 0.02f;
+            up.Y += 0.03f;//下降
+
+            URCoordinates upper = new URCoordinates(up);
+            upper.Y -= 0.07f;//上
+            rtn.infotxt.Add("pmovej");
+            rtn.infotxt.Add(upper.ToPos());
+
+
+            URCoordinates add = new URCoordinates(up);
+            add.Rx = 3.14f;
+            add.Ry = 0f;
+            add.Rz = 0f;
+            add.Y -= 0.09f;//上升
+            add.X += 0.05f;
+            rtn.infotxt.Add("pmovej");
+            rtn.infotxt.Add(up.ToPos());
+            rtn.infotxt.Add("pmovej");
+            rtn.infotxt.Add(add.ToPos());
+            rtn.infotxt.Add("pmovej");
+            add.Y -= 0.03f;//上升
+            rtn.infotxt.Add(add.ToPos());
+            return rtn;
+        }
+        public static class Name
+        {
+            public static string Pick = "Pick";
+            public static string Place = "Place";
+            public static string Pour = "Pour";
+            public static string Trigger = "Touggle";
+            public static string Scoop = "Ladle";
+            public static string AddaSpoon = "Add";
+            public static string Stir = "Stir";
+        }
+
     }
 
     class subactInfo

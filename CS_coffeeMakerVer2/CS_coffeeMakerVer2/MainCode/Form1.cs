@@ -74,7 +74,7 @@ namespace CS_coffeeMakerVer2
             comboBox_LselectPos.Items.Clear();
             comboBox_RselectPos.Items.Clear();
 
-            readPosPathFile();
+
 
 
 
@@ -153,25 +153,7 @@ namespace CS_coffeeMakerVer2
         }//on click
 
 
-        private void comboBox_selectPos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string str = ((ComboBox)sender).Text;
-            if (str == "goPos")
-                ((ComboBox)sender).BackColor = Color.HotPink;
-            else
-            {
-                string Extension = str.Substring(str.IndexOf("."));
-                if (Extension == ".pos")
-                {
-                    ((ComboBox)sender).BackColor = Color.Aquamarine;
-                }
-                if (Extension == ".path")
-                {
-                    ((ComboBox)sender).BackColor = Color.LemonChiffon;
-                }
-            }
 
-        }
         private void button_Larm_goPos_Click(object sender, EventArgs e)
         {
             if (comboBox_LselectPos.Text == "" || comboBox_LselectPos.Text == "goPos")
@@ -218,7 +200,7 @@ namespace CS_coffeeMakerVer2
         VideoCapture webCam1;
         static YoloWrapper yoloWrapper;
         static IEnumerable<YoloItem> items;
-       static int videoIndex = 10;
+        static int videoIndex = 10;
         private void correct(ref PointF P)
         {
             float v = 0;
@@ -228,7 +210,7 @@ namespace CS_coffeeMakerVer2
         private static bool vidioLoop = false;
         private void YOLO_detect(bool isLive, string actTxtFile = "")
         {
-            yoloWrapper = new YoloWrapper("modle\\yolov3-tiny-2obj.cfg", "modle\\yolov3-tiny-2obj_2cup.weights", "modle\\obj.names");
+            yoloWrapper = new YoloWrapper("modle\\yolov3-tiny-3obj.cfg", "modle\\yolov3-tiny-3obj_3cup.weights", "modle\\obj.names");
             string detectionSystemDetail = string.Empty;
             if (!string.IsNullOrEmpty(yoloWrapper.EnvironmentReport.GraphicDeviceName))
                 detectionSystemDetail = $"({yoloWrapper.EnvironmentReport.GraphicDeviceName})";
@@ -269,8 +251,13 @@ namespace CS_coffeeMakerVer2
                         int H = item.Height;
                         int W = item.Width;
 
+                        if (name == "white cup")
+                            continue;
+                        if (item.Confidence < 0.5)
+                           continue;
+
                         CvInvoke.PutText(camImg1, name, new Point(x, y), FontFace.HersheySimplex, 1, new MCvScalar(50, 230, 230));
-                        CvInvoke.PutText(camImg1, item.Confidence.ToString("0.0"), new Point(x, y-10), FontFace.HersheySimplex, 0.5, new MCvScalar(50, 230, 230));
+                        CvInvoke.PutText(camImg1, item.Confidence.ToString("0.0"), new Point(x, y - 20), FontFace.HersheySimplex, 0.5, new MCvScalar(50, 230, 230));
                         CvInvoke.Rectangle(camImg1, new Rectangle(x, y, W, H), new MCvScalar(50, 230, 230), 3);
 
                         if (item.Type == "blue cup")
@@ -340,7 +327,7 @@ namespace CS_coffeeMakerVer2
                 else
                 {
                     this.Invoke((MethodInvoker)(() => label_Cup2_info.Text = "Block"));
-                    tmp_write+="B";
+                    tmp_write += "B";
                 }
                 if (isLive)
                     write.Clear();
@@ -395,8 +382,6 @@ namespace CS_coffeeMakerVer2
             tmp});
             }
 
-
-          
 
 
 
@@ -466,12 +451,12 @@ namespace CS_coffeeMakerVer2
 
             action.add(Subact.Pick(cup[0]));
             action.add(Subact.Pour(cup[1]));
-            action.add(Subact.Place(cup[0],new URCoordinates(0.353f, 0.23f, -0.170f, (float)(Math.PI), 0, 0)));
+            action.add(Subact.Place(cup[0], new URCoordinates(0.353f, 0.23f, -0.170f, (float)(Math.PI), 0, 0)));
             action.add(Subact.Pick(cup[1]));
             action.add(Subact.Place(subactInfo.place.DripTray));
             action.add(Subact.Trigger());
             action.add(Subact.Pick(subactInfo.place.DripTray));
-            action.add(Subact.Place(cup[1],new URCoordinates(0.190f, 0.23f, -0.110f, (float)(Math.PI), 0, 0)));
+            action.add(Subact.Place(cup[1], new URCoordinates(0.190f, 0.23f, -0.110f, (float)(Math.PI), 0, 0)));
 
             action.execute();
         }
@@ -505,21 +490,21 @@ namespace CS_coffeeMakerVer2
                 if (rb.Act.Pick.cup1.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
-                    item1.SubItems.Add("Pick");
+                    item1.SubItems.Add(Subact.Name.Pick);
                     item1.SubItems.Add(cup[0].Name);
                     listView_actBase.Items.Add(item1);
                 }
                 else if (rb.Act.Pick.cup2.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
-                    item1.SubItems.Add("Pick");
+                    item1.SubItems.Add(Subact.Name.Pick);
                     item1.SubItems.Add(cup[1].Name);
                     listView_actBase.Items.Add(item1);
                 }
-                else if(rb.Act.Pick.fromDrip.Checked)
+                else if (rb.Act.Pick.fromDrip.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
-                    item1.SubItems.Add("Pick");
+                    item1.SubItems.Add(Subact.Name.Pick);
                     item1.SubItems.Add("from drip tray");
                     listView_actBase.Items.Add(item1);
                 }
@@ -529,14 +514,14 @@ namespace CS_coffeeMakerVer2
                 if (rb.Act.Place.toDrip.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
-                    item1.SubItems.Add("Place");
+                    item1.SubItems.Add(Subact.Name.Place);
                     item1.SubItems.Add("to drip tray");
                     listView_actBase.Items.Add(item1);
                 }
                 else if (radioButton_Act_place_pos.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
-                    item1.SubItems.Add("Place");
+                    item1.SubItems.Add(Subact.Name.Place);
                     item1.SubItems.Add($"to Pos {textBox_Px.Text} {textBox_Py.Text} {textBox_Pz.Text}");
                     listView_actBase.Items.Add(item1);
                 }
@@ -546,30 +531,73 @@ namespace CS_coffeeMakerVer2
                 if (rb.Act.Pour.toCup1.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
-                    item1.SubItems.Add("Pour");
-                    item1.SubItems.Add("to "+ cup[0].Name);
+                    item1.SubItems.Add(Subact.Name.Pour);
+                    item1.SubItems.Add("to " + cup[0].Name);
                     listView_actBase.Items.Add(item1);
                 }
                 else if (rb.Act.Pour.toCup2.Checked)
                 {
                     ListViewItem item1 = new ListViewItem();
-                    item1.SubItems.Add("Pour");
-                    item1.SubItems.Add("to "+cup[1].Name);
+                    item1.SubItems.Add(Subact.Name.Pour);
+                    item1.SubItems.Add("to " + cup[1].Name);
                     listView_actBase.Items.Add(item1);
                 }
             }
             else if (rb.Act.trigger.Checked)
             {
                 ListViewItem item1 = new ListViewItem();
-                item1.SubItems.Add("Toggle");
+                item1.SubItems.Add(Subact.Name.Trigger);
                 item1.SubItems.Add("coffee machine");
                 listView_actBase.Items.Add(item1);
+            }
+            else if (rb.Act.scoop.Checked)
+            {
+                ListViewItem item1 = new ListViewItem();
+                item1.SubItems.Add(Subact.Name.Scoop);
+                item1.SubItems.Add("coffee powder");
+                listView_actBase.Items.Add(item1);
+            }
+            else if (rb.Act.addaSpoon.Checked)
+            {
+                if (rb.Act.AddaSpoon.toCup1.Checked)
+                {
+                    ListViewItem item1 = new ListViewItem();
+                    item1.SubItems.Add(Subact.Name.AddaSpoon);
+                    item1.SubItems.Add("to " + cup[0].Name);
+                    listView_actBase.Items.Add(item1);
+                }
+                else if (rb.Act.AddaSpoon.toCup2.Checked)
+                {
+                    ListViewItem item1 = new ListViewItem();
+                    item1.SubItems.Add(Subact.Name.AddaSpoon);
+                    item1.SubItems.Add("to " + cup[1].Name);
+                    listView_actBase.Items.Add(item1);
+                }
+            }
+            else if (rb.Act.stir.Checked)
+            {
+                if (rb.Act.Stir.toCup1.Checked)
+                {
+                    ListViewItem item1 = new ListViewItem();
+                    item1.SubItems.Add(Subact.Name.Stir);
+                    item1.SubItems.Add("to " + cup[0].Name);
+                    listView_actBase.Items.Add(item1);
+                }
+                else if (rb.Act.Stir.toCup2.Checked)
+                {
+                    ListViewItem item1 = new ListViewItem();
+                    item1.SubItems.Add(Subact.Name.Stir);
+                    item1.SubItems.Add("to " + cup[1].Name);
+                    listView_actBase.Items.Add(item1);
+                }
             }
         }
 
         private void button_clearActionBase_Click(object sender, EventArgs e)
         {
             listView_actBase.Items.Clear();
+            ListViewItem item1 = new ListViewItem();
+            listView_actBase.Items.Add(item1);
         }
 
         private void button_creatAction_Click(object sender, EventArgs e)
@@ -582,9 +610,10 @@ namespace CS_coffeeMakerVer2
                 string act = listView_actBase.Items[i].SubItems[1].Text;
                 string obj = listView_actBase.Items[i].SubItems[2].Text;
 
-               
+                if (act == "")
+                    continue;
 
-                if (act == "Pick")
+                if (act == Subact.Name.Pick)
                 {
                     if (obj == cup[0].Name)
                     {
@@ -599,26 +628,44 @@ namespace CS_coffeeMakerVer2
                     else if (obj == "from drip tray")
                         action.add(Subact.Pick(subactInfo.place.DripTray));
                 }
-                else if (act == "Place")
+                else if (act == Subact.Name.Place)
                 {
                     if (obj == "to drip tray")
                         action.add(Subact.Place(subactInfo.place.DripTray));
-                    else if ( obj.IndexOf("to Pos") >=0 )
+                    else if (obj.IndexOf("to Pos") >= 0)
                     {
                         string[] tmp = obj.Substring(7).Split(' ');
                         action.add(Subact.Place(gripObj, new URCoordinates(float.Parse(tmp[0]), float.Parse(tmp[1]), float.Parse(tmp[2]), (float)(Math.PI), 0, 0)));
                     }
                 }
-                else if (act == "Pour")
+                else if (act == Subact.Name.Pour)
                 {
-                    if (obj == "to "+ cup[0].Name)
+                    if (obj == "to " + cup[0].Name)
                         action.add(Subact.Pour(cup[0]));
-                    else if (obj == "to "+ cup[1].Name)
+                    else if (obj == "to " + cup[1].Name)
                         action.add(Subact.Pour(cup[1]));
                 }
-                else if (act == "Toggle")
+                else if (act == Subact.Name.Trigger)
                 {
                     action.add(Subact.Trigger());
+                }
+                else if (act == Subact.Name.Scoop)
+                {
+                    action.add(Subact.Scoop());
+                }
+                else if (act == Subact.Name.AddaSpoon)
+                {
+                    if (obj == "to " + cup[0].Name)
+                        action.add(Subact.AddaSpoon(cup[0]));
+                    else if (obj == "to " + cup[1].Name)
+                        action.add(Subact.AddaSpoon(cup[1]));
+                }
+                else if (act == Subact.Name.Stir)
+                {
+                    if (obj == "to " + cup[0].Name)
+                        action.add(Subact.Stir(cup[0]));
+                    else if (obj == "to " + cup[1].Name)
+                        action.add(Subact.Stir(cup[1]));
                 }
             }
             action.execute();
@@ -627,48 +674,77 @@ namespace CS_coffeeMakerVer2
 
         private void button_sumulateAround_Click(object sender, EventArgs e)
         {
-            rb.Act.pick.Checked = true;
-            rb.Act.Pick.cup2.Checked = true;
-            button_simulateAddAct_Click(null, null);
+            //rb.Act.scoop.Checked = true;
+            //button_simulateAddAct_Click(null, null);
 
-            rb.Act.place.Checked = true;
-            rb.Act.Place.toDrip.Checked = true;
-            button_simulateAddAct_Click(null, null);
+            //rb.Act.addaSpoon.Checked = true;
+            //rb.Act.AddaSpoon.toCup1.Checked = true;
+            //button_simulateAddAct_Click(null, null);
 
-            rb.Act.trigger.Checked = true;
-            button_simulateAddAct_Click(null, null);
+            //rb.Act.scoop.Checked = true;
+            //button_simulateAddAct_Click(null, null);
 
-            rb.Act.pick.Checked = true;
-            rb.Act.Pick.fromDrip.Checked = true;
-            button_simulateAddAct_Click(null, null);
+            //rb.Act.addaSpoon.Checked = true;
+            //rb.Act.AddaSpoon.toCup2.Checked = true;
+            //button_simulateAddAct_Click(null, null);
 
-            textBox_Px.Text = "0.355";
-            textBox_Py.Text = "0.23";
-            textBox_Pz.Text = "-0.12";
-            rb.Act.place.Checked = true;
-            rb.Act.Place.toPos.Checked = true;
-            button_simulateAddAct_Click(null, null);
+            //rb.Act.scoop.Checked = true;
+            //button_simulateAddAct_Click(null, null);
 
- 
-            rb.Act.pick.Checked = true;
-            rb.Act.Pick.cup1.Checked = true;
-            button_simulateAddAct_Click(null, null);
+            //rb.Act.addaSpoon.Checked = true;
+            //rb.Act.AddaSpoon.toCup2.Checked = true;
+            //button_simulateAddAct_Click(null, null);
 
-            rb.Act.pour.Checked = true;
-            rb.Act.Pour.toCup2.Checked = true;
-            button_simulateAddAct_Click(null, null);
+            //rb.Act.stir.Checked = true;
+            //rb.Act.Stir.toCup2.Checked = true;
+            //button_simulateAddAct_Click(null, null);
 
-            textBox_Px.Text = "0.285";
-            textBox_Py.Text = "0.23";
-            textBox_Pz.Text = "-0.311";
-            rb.Act.place.Checked = true;
-            rb.Act.Place.toPos.Checked = true;
-            button_simulateAddAct_Click(null, null);
-      
+            //rb.Act.stir.Checked = true;
+            //rb.Act.Stir.toCup1.Checked = true;
+            //button_simulateAddAct_Click(null, null);
+
+           
+                  rb.Act.pick.Checked = true;
+                  rb.Act.Pick.cup2.Checked = true;
+                  button_simulateAddAct_Click(null, null);
+
+                  rb.Act.place.Checked = true;
+                  rb.Act.Place.toDrip.Checked = true;
+                  button_simulateAddAct_Click(null, null);
+
+                  rb.Act.trigger.Checked = true;
+                  button_simulateAddAct_Click(null, null);
+
+                  rb.Act.pick.Checked = true;
+                  rb.Act.Pick.fromDrip.Checked = true;
+                  button_simulateAddAct_Click(null, null);
+
+                  textBox_Px.Text = "0.355";
+                  textBox_Py.Text = "0.23";
+                  textBox_Pz.Text = "-0.12";
+                  rb.Act.place.Checked = true;
+                  rb.Act.Place.toPos.Checked = true;
+                  button_simulateAddAct_Click(null, null);
+
+
+                  rb.Act.pick.Checked = true;
+                  rb.Act.Pick.cup1.Checked = true;
+                  button_simulateAddAct_Click(null, null);
+
+                  rb.Act.pour.Checked = true;
+                  rb.Act.Pour.toCup2.Checked = true;
+                  button_simulateAddAct_Click(null, null);
+
+                  textBox_Px.Text = "0.285";
+                  textBox_Py.Text = "0.23";
+                  textBox_Pz.Text = "-0.311";
+                  rb.Act.place.Checked = true;
+                  rb.Act.Place.toPos.Checked = true;
+                  button_simulateAddAct_Click(null, null);
         }
         #endregion action
 
-      
+
         private void imageBox3_Click(object sender, EventArgs e)
         {
             string[] file = File.ReadAllLines($"Act\\{videoIndex}_act_output.txt");
@@ -706,7 +782,6 @@ namespace CS_coffeeMakerVer2
             imageBox3.Image = mat;
         }
 
-      
 
 
     }//class form
@@ -737,7 +812,7 @@ namespace CS_coffeeMakerVer2
 
         public void saveNowPos()
         {
-            nowPos =  new URCoordinates(getX_m(), getY_m() , getZ_m() , 0, 0, 0);
+            nowPos = new URCoordinates(getX_m(), getY_m(), getZ_m(), 0, 0, 0);
         }
         public void setNowPos(URCoordinates urc)
         {

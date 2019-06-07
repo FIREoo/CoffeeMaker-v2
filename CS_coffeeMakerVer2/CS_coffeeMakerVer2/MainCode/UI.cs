@@ -37,7 +37,22 @@ namespace CS_coffeeMakerVer2
                     static public RadioButton toCup2 = new RadioButton();
                 }
                 static public RadioButton trigger = new RadioButton();
-            }
+
+                static public RadioButton scoop = new RadioButton();
+
+                static public RadioButton addaSpoon = new RadioButton();
+                public static class AddaSpoon
+                {
+                    static public RadioButton toCup1 = new RadioButton();
+                    static public RadioButton toCup2 = new RadioButton();
+                }
+                static public RadioButton stir = new RadioButton();
+                public static class Stir
+                {
+                    static public RadioButton toCup1 = new RadioButton();
+                    static public RadioButton toCup2 = new RadioButton();
+                }
+                }
         }
 
         private void renameControl()
@@ -55,6 +70,15 @@ namespace CS_coffeeMakerVer2
             rb.Act.Pour.toCup1 = radioButton_Act_pour_to1;
             rb.Act.Pour.toCup2 = radioButton_Act_pour_to2;
             rb.Act.trigger = radioButton_Act_trigger;
+
+            rb.Act.scoop = radioButton_Act_scoop;
+            rb.Act.addaSpoon = radioButton_Act_addaSpoon;
+            rb.Act.AddaSpoon.toCup1 = radioButton_Act_addaSpoon_toCup1;
+            rb.Act.AddaSpoon.toCup2 = radioButton_Act_addaSpoon_toCup2;
+
+            rb.Act.stir = radioButton_Act_stir;
+            rb.Act.Stir.toCup1 = radioButton_Act_stir_cup1;
+            rb.Act.Stir.toCup2 = radioButton_Act_stir_cup2;
         }
         public void creatJogButton()
         {
@@ -93,6 +117,34 @@ namespace CS_coffeeMakerVer2
                 btn_Ljog[i].MouseDown += new MouseEventHandler(OnClick_jog);
             }
         }
+
+        #region select combobox
+        private void comboBox_selectPos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string str = ((ComboBox)sender).Text;
+            if (str == "goPos")
+                ((ComboBox)sender).BackColor = Color.HotPink;
+            else
+            {
+                string Extension = str.Substring(str.IndexOf("."));
+                if (Extension == ".pos")
+                {
+                    ((ComboBox)sender).BackColor = Color.Aquamarine;
+                }
+                if (Extension == ".path")
+                {
+                    ((ComboBox)sender).BackColor = Color.LemonChiffon;
+                }
+            }
+
+        }
+        private void comboBox_selectPos_DropDown(object sender, EventArgs e)
+        {
+            ((ComboBox)sender).BackColor = Color.White;
+            readPosPathFile();
+        }
+        #endregion select combobox
+
 
         private void button_setCam_Click(object sender, EventArgs e)
         {

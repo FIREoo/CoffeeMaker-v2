@@ -37,7 +37,7 @@ namespace CS_coffeeMakerVer2
 
         //file
         static string ReadingFile = "";
-       public StreamWriter txt_record;
+        public StreamWriter txt_record;
 
         string sMsg = string.Empty;
         public string Msg { get { return sMsg; } }
@@ -173,8 +173,30 @@ namespace CS_coffeeMakerVer2
                                         Console.WriteLine("Robot : " + sMsg);//應該會是獲得"work done" 
                                     }
                                     break;
-                                case "jservoj":
+                                case "pmovej":
+                                    while (true)
+                                    {
+                                        p++;
+                                        if (p >= fileList.Count())//代表最後一行了
+                                            break;
+                                        if (fileList[p].IndexOf('[') == -1)//代表是指令
+                                            break;
+                                        _sendMsg("pmovej", ref cmd);//record pos模式
 
+                                        sMsg = _waitRead(ref cmd); if (sMsg == "End") break;
+                                        Console.WriteLine("Robot : " + sMsg);//應該會是獲得 movep
+
+                                        byte[] _pcount = new byte[1] { 1 };
+                                        stream.Write(_pcount, 0, 1);//@test   1個點
+
+                                        sMsg = _waitRead(ref cmd); if (sMsg == "End") break;
+                                        Console.WriteLine("Robot : " + sMsg);//應該會是獲得"set" 也就是要開始給座標點
+
+                                        _sendMsg("(" + fileList[p].Substring(2, fileList[p].Length - 3) + ")", ref cmd);//point
+
+                                        sMsg = _waitRead(ref cmd); if (sMsg == "End") break;
+                                        Console.WriteLine("Robot : " + sMsg);//應該會是獲得"work done" 
+                                    }
                                     break;
                                 case "gripper"://gripper 只能一行 gripper 一行 數字
                                     p++;

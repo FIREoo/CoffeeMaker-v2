@@ -119,16 +119,27 @@
             this.textBox_Pz = new System.Windows.Forms.TextBox();
             this.textBox_Py = new System.Windows.Forms.TextBox();
             this.textBox_Px = new System.Windows.Forms.TextBox();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.radioButton_Act_addaSpoon_toCup1 = new System.Windows.Forms.RadioButton();
+            this.label22 = new System.Windows.Forms.Label();
+            this.radioButton_Act_addaSpoon_toCup2 = new System.Windows.Forms.RadioButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.radioButton_Act_pick_cup1 = new System.Windows.Forms.RadioButton();
             this.label17 = new System.Windows.Forms.Label();
+            this.radioButton_Act_pick_drip = new System.Windows.Forms.RadioButton();
             this.radioButton_Act_pick_cup2 = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radioButton_Act_pick = new System.Windows.Forms.RadioButton();
             this.radioButton_Act_place = new System.Windows.Forms.RadioButton();
+            this.radioButton_Act_addaSpoon = new System.Windows.Forms.RadioButton();
+            this.radioButton_Act_scoop = new System.Windows.Forms.RadioButton();
             this.radioButton_Act_trigger = new System.Windows.Forms.RadioButton();
             this.radioButton_Act_pour = new System.Windows.Forms.RadioButton();
-            this.radioButton_Act_pick_drip = new System.Windows.Forms.RadioButton();
+            this.radioButton_Act_stir = new System.Windows.Forms.RadioButton();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.radioButton_Act_stir_cup1 = new System.Windows.Forms.RadioButton();
+            this.label23 = new System.Windows.Forms.Label();
+            this.radioButton_Act_stir_cup2 = new System.Windows.Forms.RadioButton();
             this.panel_Larm.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -147,8 +158,10 @@
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -412,6 +425,7 @@
             this.comboBox_LselectPos.Name = "comboBox_LselectPos";
             this.comboBox_LselectPos.Size = new System.Drawing.Size(113, 24);
             this.comboBox_LselectPos.TabIndex = 3;
+            this.comboBox_LselectPos.DropDown += new System.EventHandler(this.comboBox_selectPos_DropDown);
             this.comboBox_LselectPos.SelectedIndexChanged += new System.EventHandler(this.comboBox_selectPos_SelectedIndexChanged);
             // 
             // button_Larm_goPos
@@ -442,6 +456,7 @@
             this.comboBox_RselectPos.Name = "comboBox_RselectPos";
             this.comboBox_RselectPos.Size = new System.Drawing.Size(113, 24);
             this.comboBox_RselectPos.TabIndex = 3;
+            this.comboBox_RselectPos.DropDown += new System.EventHandler(this.comboBox_selectPos_DropDown);
             this.comboBox_RselectPos.SelectedIndexChanged += new System.EventHandler(this.comboBox_selectPos_SelectedIndexChanged);
             // 
             // panel_Larm
@@ -908,6 +923,8 @@
             this.tabPage5.Controls.Add(this.panel7);
             this.tabPage5.Controls.Add(this.panel6);
             this.tabPage5.Controls.Add(this.panel5);
+            this.tabPage5.Controls.Add(this.panel9);
+            this.tabPage5.Controls.Add(this.panel8);
             this.tabPage5.Controls.Add(this.panel4);
             this.tabPage5.Controls.Add(this.panel1);
             this.tabPage5.Location = new System.Drawing.Point(4, 25);
@@ -1060,6 +1077,51 @@
             this.textBox_Px.Size = new System.Drawing.Size(40, 23);
             this.textBox_Px.TabIndex = 2;
             // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel8.Controls.Add(this.radioButton_Act_addaSpoon_toCup1);
+            this.panel8.Controls.Add(this.label22);
+            this.panel8.Controls.Add(this.radioButton_Act_addaSpoon_toCup2);
+            this.panel8.Location = new System.Drawing.Point(135, 375);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(124, 68);
+            this.panel8.TabIndex = 3;
+            // 
+            // radioButton_Act_addaSpoon_toCup1
+            // 
+            this.radioButton_Act_addaSpoon_toCup1.AutoSize = true;
+            this.radioButton_Act_addaSpoon_toCup1.Checked = true;
+            this.radioButton_Act_addaSpoon_toCup1.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_addaSpoon_toCup1.Location = new System.Drawing.Point(55, 9);
+            this.radioButton_Act_addaSpoon_toCup1.Name = "radioButton_Act_addaSpoon_toCup1";
+            this.radioButton_Act_addaSpoon_toCup1.Size = new System.Drawing.Size(46, 23);
+            this.radioButton_Act_addaSpoon_toCup1.TabIndex = 1;
+            this.radioButton_Act_addaSpoon_toCup1.TabStop = true;
+            this.radioButton_Act_addaSpoon_toCup1.Text = "(B)";
+            this.radioButton_Act_addaSpoon_toCup1.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label22.Location = new System.Drawing.Point(12, 11);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(37, 19);
+            this.label22.TabIndex = 0;
+            this.label22.Text = "Cup";
+            // 
+            // radioButton_Act_addaSpoon_toCup2
+            // 
+            this.radioButton_Act_addaSpoon_toCup2.AutoSize = true;
+            this.radioButton_Act_addaSpoon_toCup2.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_addaSpoon_toCup2.Location = new System.Drawing.Point(55, 38);
+            this.radioButton_Act_addaSpoon_toCup2.Name = "radioButton_Act_addaSpoon_toCup2";
+            this.radioButton_Act_addaSpoon_toCup2.Size = new System.Drawing.Size(46, 23);
+            this.radioButton_Act_addaSpoon_toCup2.TabIndex = 1;
+            this.radioButton_Act_addaSpoon_toCup2.Text = "(P)";
+            this.radioButton_Act_addaSpoon_toCup2.UseVisualStyleBackColor = true;
+            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
@@ -1095,6 +1157,17 @@
             this.label17.TabIndex = 0;
             this.label17.Text = "Cup";
             // 
+            // radioButton_Act_pick_drip
+            // 
+            this.radioButton_Act_pick_drip.AutoSize = true;
+            this.radioButton_Act_pick_drip.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_pick_drip.Location = new System.Drawing.Point(55, 66);
+            this.radioButton_Act_pick_drip.Name = "radioButton_Act_pick_drip";
+            this.radioButton_Act_pick_drip.Size = new System.Drawing.Size(125, 23);
+            this.radioButton_Act_pick_drip.TabIndex = 1;
+            this.radioButton_Act_pick_drip.Text = "from drip tray";
+            this.radioButton_Act_pick_drip.UseVisualStyleBackColor = true;
+            // 
             // radioButton_Act_pick_cup2
             // 
             this.radioButton_Act_pick_cup2.AutoSize = true;
@@ -1111,11 +1184,14 @@
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.Controls.Add(this.radioButton_Act_pick);
             this.panel1.Controls.Add(this.radioButton_Act_place);
+            this.panel1.Controls.Add(this.radioButton_Act_addaSpoon);
+            this.panel1.Controls.Add(this.radioButton_Act_stir);
+            this.panel1.Controls.Add(this.radioButton_Act_scoop);
             this.panel1.Controls.Add(this.radioButton_Act_trigger);
             this.panel1.Controls.Add(this.radioButton_Act_pour);
-            this.panel1.Location = new System.Drawing.Point(29, 17);
+            this.panel1.Location = new System.Drawing.Point(6, 17);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(101, 285);
+            this.panel1.Size = new System.Drawing.Size(124, 543);
             this.panel1.TabIndex = 3;
             // 
             // radioButton_Act_pick
@@ -1142,6 +1218,28 @@
             this.radioButton_Act_place.Text = "place";
             this.radioButton_Act_place.UseVisualStyleBackColor = true;
             // 
+            // radioButton_Act_addaSpoon
+            // 
+            this.radioButton_Act_addaSpoon.AutoSize = true;
+            this.radioButton_Act_addaSpoon.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_addaSpoon.Location = new System.Drawing.Point(16, 374);
+            this.radioButton_Act_addaSpoon.Name = "radioButton_Act_addaSpoon";
+            this.radioButton_Act_addaSpoon.Size = new System.Drawing.Size(116, 23);
+            this.radioButton_Act_addaSpoon.TabIndex = 1;
+            this.radioButton_Act_addaSpoon.Text = "Add a spoon";
+            this.radioButton_Act_addaSpoon.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Act_scoop
+            // 
+            this.radioButton_Act_scoop.AutoSize = true;
+            this.radioButton_Act_scoop.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_scoop.Location = new System.Drawing.Point(16, 318);
+            this.radioButton_Act_scoop.Name = "radioButton_Act_scoop";
+            this.radioButton_Act_scoop.Size = new System.Drawing.Size(68, 23);
+            this.radioButton_Act_scoop.TabIndex = 1;
+            this.radioButton_Act_scoop.Text = "scoop";
+            this.radioButton_Act_scoop.UseVisualStyleBackColor = true;
+            // 
             // radioButton_Act_trigger
             // 
             this.radioButton_Act_trigger.AutoSize = true;
@@ -1164,16 +1262,61 @@
             this.radioButton_Act_pour.Text = "pour";
             this.radioButton_Act_pour.UseVisualStyleBackColor = true;
             // 
-            // radioButton_Act_pick_drip
+            // radioButton_Act_stir
             // 
-            this.radioButton_Act_pick_drip.AutoSize = true;
-            this.radioButton_Act_pick_drip.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton_Act_pick_drip.Location = new System.Drawing.Point(55, 66);
-            this.radioButton_Act_pick_drip.Name = "radioButton_Act_pick_drip";
-            this.radioButton_Act_pick_drip.Size = new System.Drawing.Size(125, 23);
-            this.radioButton_Act_pick_drip.TabIndex = 1;
-            this.radioButton_Act_pick_drip.Text = "from drip tray";
-            this.radioButton_Act_pick_drip.UseVisualStyleBackColor = true;
+            this.radioButton_Act_stir.AutoSize = true;
+            this.radioButton_Act_stir.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_stir.Location = new System.Drawing.Point(16, 455);
+            this.radioButton_Act_stir.Name = "radioButton_Act_stir";
+            this.radioButton_Act_stir.Size = new System.Drawing.Size(49, 23);
+            this.radioButton_Act_stir.TabIndex = 1;
+            this.radioButton_Act_stir.Text = "stir";
+            this.radioButton_Act_stir.UseVisualStyleBackColor = true;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel9.Controls.Add(this.radioButton_Act_stir_cup1);
+            this.panel9.Controls.Add(this.label23);
+            this.panel9.Controls.Add(this.radioButton_Act_stir_cup2);
+            this.panel9.Location = new System.Drawing.Point(139, 472);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(124, 68);
+            this.panel9.TabIndex = 3;
+            // 
+            // radioButton_Act_stir_cup1
+            // 
+            this.radioButton_Act_stir_cup1.AutoSize = true;
+            this.radioButton_Act_stir_cup1.Checked = true;
+            this.radioButton_Act_stir_cup1.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_stir_cup1.Location = new System.Drawing.Point(55, 9);
+            this.radioButton_Act_stir_cup1.Name = "radioButton_Act_stir_cup1";
+            this.radioButton_Act_stir_cup1.Size = new System.Drawing.Size(46, 23);
+            this.radioButton_Act_stir_cup1.TabIndex = 1;
+            this.radioButton_Act_stir_cup1.TabStop = true;
+            this.radioButton_Act_stir_cup1.Text = "(B)";
+            this.radioButton_Act_stir_cup1.UseVisualStyleBackColor = true;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label23.Location = new System.Drawing.Point(12, 11);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(37, 19);
+            this.label23.TabIndex = 0;
+            this.label23.Text = "Cup";
+            // 
+            // radioButton_Act_stir_cup2
+            // 
+            this.radioButton_Act_stir_cup2.AutoSize = true;
+            this.radioButton_Act_stir_cup2.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_Act_stir_cup2.Location = new System.Drawing.Point(55, 38);
+            this.radioButton_Act_stir_cup2.Name = "radioButton_Act_stir_cup2";
+            this.radioButton_Act_stir_cup2.Size = new System.Drawing.Size(46, 23);
+            this.radioButton_Act_stir_cup2.TabIndex = 1;
+            this.radioButton_Act_stir_cup2.Text = "(P)";
+            this.radioButton_Act_stir_cup2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -1213,10 +1356,14 @@
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1322,6 +1469,17 @@
         private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
         private System.Windows.Forms.Button button_sumulateAround;
         private System.Windows.Forms.RadioButton radioButton_Act_pick_drip;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.RadioButton radioButton_Act_addaSpoon_toCup1;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.RadioButton radioButton_Act_addaSpoon_toCup2;
+        private System.Windows.Forms.RadioButton radioButton_Act_addaSpoon;
+        private System.Windows.Forms.RadioButton radioButton_Act_scoop;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.RadioButton radioButton_Act_stir_cup1;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.RadioButton radioButton_Act_stir_cup2;
+        private System.Windows.Forms.RadioButton radioButton_Act_stir;
     }
 }
 
